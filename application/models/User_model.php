@@ -188,7 +188,7 @@ class User_model extends CI_Model
     }
 
     private function _updateLastLogin($user_id){
-        $sql = "UPDATE {$this->_table} SET last_login=now(), is_active='active' WHERE user_id={$user_id}";
+        $sql = "UPDATE {$this->_table} SET last_login=now(), is_active='online' WHERE user_id={$user_id}";
         $this->db->query($sql);
 	}
 

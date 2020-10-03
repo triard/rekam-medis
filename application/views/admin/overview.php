@@ -32,7 +32,6 @@
                 </div>
 				<?php endif; ?>
 				
-				
                 <!-- Icon Cards-->
                 <div class="row">
                     <!-- $logged_user = $this->session->userdata('user_logged');
