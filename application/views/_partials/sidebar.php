@@ -18,7 +18,7 @@
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?php echo  base_url('admin/user/list')?>">
             <i class="fas fa-fw fa-users"></i>
             <span>Users</span></a>
     </li>
