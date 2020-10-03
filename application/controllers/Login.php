@@ -37,7 +37,7 @@ class Login extends CI_Controller
 		// hancurkan semua sesi
 //		$this->user_model->changeStatus();
 
-		$sql = "UPDATE users SET is_active='off' WHERE user_id={$id}";
+		$sql = "UPDATE users SET is_active='offline' WHERE user_id={$id}";
 		$this->db->query($sql);
 		$this->session->sess_destroy();
         redirect(site_url('login'));
