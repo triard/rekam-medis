@@ -170,7 +170,6 @@ class User_model extends CI_Model
                 // login sukses yay!
                 $this->session->set_userdata(['user_logged' => $user]);
 				$this->_updateLastLogin($user->user_id);
-				
                 return true;
             }elseif($isPasswordTrue && $isRekdis){
 				$this->session->set_userdata(['user_logged' => $user]);

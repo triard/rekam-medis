@@ -29,8 +29,7 @@
 				<img class="rounded-circle" src="<?php echo base_url('assets/images/user/'.$logged_user->image) ?>" alt="image" width="80px" height="80px">
 				<p><span class="badge badge-pill badge-primary"><?php echo $logged_user->role ?></span></p>
 				</center>
-                <a class="dropdown-item" href="<?php echo site_url('admin/overview/detail/'.$logged_user->user_id) ?>">Profile</a>
-                <a class="dropdown-item" href="<?php echo base_url('admin/overview/log_activitas') ?>">Activity Log</a>
+                <a class="dropdown-item" href="<?php echo site_url('rekam_medis/overview/detail/'.$logged_user->user_id) ?>">Profile</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?= site_url('admin/login/logout') ?>" data-toggle="modal" data-target="#logoutModal">Logout</a>
             </div>
