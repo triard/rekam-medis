@@ -7,11 +7,11 @@
 
 <body id="page-top">
 
-    <?php $this->load->view("_partials/navbar.php") ?>
+    <?php $this->load->view("_partials/navbar_rekdis.php") ?>
 
     <div id="wrapper">
 
-        <?php $this->load->view("_partials/sidebar.php") ?>
+        <?php $this->load->view("_partials/sidebar-rekdis.php") ?>
 
         <div id="content-wrapper">
 

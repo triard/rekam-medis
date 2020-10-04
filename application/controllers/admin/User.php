@@ -8,9 +8,11 @@ class User extends CI_Controller
         $this->load->model("user_model");
 		$this->load->library('form_validation');
 		$this->load->library('session');
-		$this->load->model("user_model");
-		if($this->user_model->isNotLogin()) redirect(site_url('admin/login'));
-	
+		if($this->user_model->isNotLogin()) redirect(site_url('login'));
+		if ($this->session->userdata('user_logged')->role != "admin") {
+		$this->session->set_flashdata('message', 'Maaf anda belum login!');
+         redirect('Login', 'refresh');	
+		}
 	}
 	
 	public function list()
@@ -56,6 +58,25 @@ class User extends CI_Controller
         if (!$data["users"]) show_404();
         
         $this->load->view("admin/users/edit_form", $data);
+	}
+
+	public function edit_admin($id= null)
+	{
+		if (!isset($id)) redirect('admin/overview');
+       
+        $users = $this->user_model;
+        $validation = $this->form_validation; 
+        $validation->set_rules($users->rules());
+
+        if ($validation->run()) {
+            $users->update();
+            $this->session->set_flashdata('success', 'Berhasil disimpan');
+        }
+
+        $data["users"] = $users->getById($id);
+        if (!$data["users"]) show_404();
+        
+        $this->load->view("general/edit_form", $data);
 	}
 
 	public function delete($id=null)
