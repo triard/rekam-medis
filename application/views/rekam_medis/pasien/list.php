@@ -8,10 +8,10 @@
 
 <body id="page-top" style="font-family: 'Roboto', sans-serif; background-color: #DEE1E2;">
 
-    <?php $this->load->view("_partials/navbar.php") ?>
+    <?php $this->load->view("_partials/navbar_rekdis.php") ?>
     <div id="wrapper">
 
-        <?php $this->load->view("_partials/sidebar.php") ?>
+        <?php $this->load->view("_partials/sidebar-rekdis.php") ?>
 
         <div id="content-wrapper">
 
@@ -19,8 +19,61 @@
 
                 <?php $this->load->view("_partials/breadcrumb.php") ?>
 
+                <?php if ($this->session->flashdata('message')): ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $this->session->flashdata('message'); ?>
+                </div>
+                <?php endif; ?>
+
                 <!-- DataTables -->
-                <!-- to do -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="tabletable table-bordered table-sm table-hover" id="dataTable" width="100%"
+                                cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Pasien</th>
+                                        <th>Nomor KTP</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($pacient as $pacient): ?>
+                                    <tr>
+                                        <td width="150">
+                                            <?php echo $pacient->nama_pasien ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $pacient->no_KTP ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $pacient->jenis_kelamin ?>
+                                        </td>
+                                        <td width="300" style="text-align: center;">
+                                            <a href="<?php echo site_url('rekam_medis/pasien/detail/'.$pacient->id_pasien) ?>"
+                                                class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i>
+                                                Detail</a>
+                                            <a href="<?php echo site_url('rekam_medis/pasien/edit/'.$pacient->id_pasien) ?>"
+                                                class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i>
+                                                Edit</a>
+                                            <a class="btn btn-outline-danger btn-sm"
+                                                href="<?php echo site_url('rekam_medis/pasien/delete/'.$pacient->id_pasien) ?>"
+                                                onclick="return confirm('Yakin Data Ini Akan Dihapus');"
+                                                style="color: red"><i class="fas fa-trash"></i>
+                                                Hapus</a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <!-- /.container-fluid -->

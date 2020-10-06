@@ -51,7 +51,7 @@ INSERT INTO `tabel_log` (`log_id`, `log_time`, `log_user`, `log_tipe`, `log_desc
 	(41, '2020-10-04 12:04:16', 'mamang', 'logout', 'melakukan logout');
 /*!40000 ALTER TABLE `tabel_log` ENABLE KEYS */;
 
--- Dumping data for table rekam_medis.tokens: ~29 rows (approximately)
+-- Dumping data for table rekam_medis.tokens: ~30 rows (approximately)
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
 INSERT INTO `tokens` (`id`, `token`, `user_id`, `created`) VALUES
 	(1, 'c85683e4d561a888684e39fb9d6db9', 2, '2020-10-02'),
