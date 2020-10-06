@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <ul class="sidebar navbar-nav">
     <li class="nav-item <?php echo $this->uri->segment(2) == '' ? 'active': '' ?>">
-        <a class="nav-link" href="<?php echo site_url('rekam_medis') ?>">
+        <a class="nav-link" href="<?php echo site_url('rekam_medis/overview') ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Overview</span>
         </a>
@@ -14,7 +14,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="<?php echo site_url('rekam_medis/pasien/add') ?>">Pasien Baru</a>
-            <a class="dropdown-item" href="<?php echo site_url('rekam_medis/pasien') ?>">Daftar Pasien</a>
+            <a class="dropdown-item" href="<?php echo site_url('rekam_medis/pasien/list') ?>">List Pasien</a>
         </div>
     </li>
     <!-- <li class="nav-item">

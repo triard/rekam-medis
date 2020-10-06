@@ -52,7 +52,7 @@
 				$config['smtp_port']="465";
 				$config['smtp_timeout']="400";
 				$config['smtp_user']="1831710143@student.polinema.ac.id";
-				$config['smtp_pass']="rahasia";
+				$config['smtp_pass']="8449541101";
 				$config['crlf']="\r\n";
 				$config['newline']="\r\n";
 				$config['wordwrap']=TRUE;
