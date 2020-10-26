@@ -19,11 +19,12 @@
 
                 <?php $this->load->view("_partials/breadcrumb.php") ?>
 
-				<!-- Card  -->
-				<div class="card mb-3">
+                <!-- Card  -->
+                <div class="card mb-3">
                     <div class="card-header">
 
-                        <a class="btn btn-warning btn-sm text-white" href="<?php echo site_url('rekam_medis/pasien/list/') ?>"><i class="fas fa-arrow-left"></i>
+                        <a class="btn btn-warning btn-sm text-white"
+                            href="<?php echo site_url('rekam_medis/pasien/list/') ?>"><i class="fas fa-arrow-left"></i>
                             Kembali</a>
                     </div>
                     <div class="card-body">
@@ -39,31 +40,49 @@
                                     <tr>
                                         <th>Nama Lengkap</th>
                                         <td><?php echo $pasien->nama_pasien?></td>
-									</tr>
-									<tr>
+                                    </tr>
+                                    <tr>
                                         <th>No KTP</th>
                                         <td><?php echo $pasien->no_KTP?></td>
-									</tr>
-									<tr>
+                                    </tr>
+                                    <tr>
                                         <th>Tanggal Lahir</th>
-                                        <td><?php echo $pasien->tgl_lahir_pasien?></td>
-									</tr>
-									<tr>
+                                        <td><?php echo date("d F Y", strtotime($pasien->tgl_lahir_pasien)) ;?></td>
+                                    </tr>
+                                    <tr>
                                         <th>Jenis Kelamin</th>
                                         <td><?php echo $pasien->jenis_kelamin?></td>
-									</tr>
-									<tr>
+                                    </tr>
+                                    <tr>
                                         <th>Alamat</th>
                                         <td><?php echo $pasien->alamat_pasien?></td>
-									</tr>
-									<tr>
+                                    </tr>
+                                    <tr>
                                         <th>No Telp.</th>
                                         <td><?php echo $pasien->no_telp_pasien?></td>
-									</tr>
-									<tr>
+                                    </tr>
+                                    <tr>
                                         <th>Agama</th>
                                         <td><?php echo $pasien->agama_pasien?></td>
-									</tr>
+                                    </tr>
+                                    <tr>
+										<th>Usia</th>
+										<td>
+                                        <?php
+											$birthday = $pasien->tgl_lahir_pasien;
+											$biday = new DateTime($birthday);
+											$today = new DateTime();
+											$diff = $today->diff($biday);
+											echo  $diff->y ." Tahun"
+										?>
+										</td>
+                                    </tr>
+									<tr>
+                                        <th>Photo KTP</th>
+                                        <td>
+										<img class="img-thumbnail" src="<?php echo base_url('assets/images/pasien/'.$pasien->image) ?>" width="50%"  alt="<?php $pasien->nama_pasien ?>" />	
+										</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

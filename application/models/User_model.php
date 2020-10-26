@@ -1,5 +1,4 @@
 <?php
-
 class User_model extends CI_Model
 {
 	private $_table = "users";
@@ -85,7 +84,7 @@ class User_model extends CI_Model
 	{
 		$post= $this->input->post();
 		$this->username = $post["username"];
-		$this->password = md5($post["password"]);
+		$this->password = password_hash($post["password"], PASSWORD_DEFAULT);
 		$this->nama_user = $post["nama_user"];
 		$this->email = $post["email"];
 		$this->role = $post["role"];
@@ -105,7 +104,7 @@ class User_model extends CI_Model
 		$post = $this->input->post();
 		$this->user_id = $post["user_id"];
 		$this->password = $post["password"];
-		$this->nama_user = $post["nama_user"];
+		$this->nama_user = password_hash($post["nama_user"],PASSWORD_DEFAULT);
 		$this->username = $post["username"];
 		$this->email = $post["email"];
 		$this->role = $post["role"];
@@ -136,8 +135,6 @@ class User_model extends CI_Model
     $config['file_name']            = $this->username;
     $config['overwrite']			= true;
     $config['max_size']             = 1024; // 1MB
-    // $config['max_width']            = 1024;
-    // $config['max_height']           = 768;
 
     $this->load->library('upload', $config);
 
@@ -157,10 +154,10 @@ class User_model extends CI_Model
                 ->or_where('username', $post["email"]);
         $user = $this->db->get($this->_table)->row();
 
-        // jika user terdaftar
+        // jika user terdaftarn
         if($user){
             // periksa password-nya
-            $isPasswordTrue = md5($post["password"], $user->password);
+            $isPasswordTrue = password_verify($post["password"], $user->password);
             // periksa role-nya
 			$isAdmin = $user->role == "admin";
 			$isRekdis  = $user->role == "rekam_medis";
@@ -189,6 +186,13 @@ class User_model extends CI_Model
     private function _updateLastLogin($user_id){
         $sql = "UPDATE {$this->_table} SET last_login=now(), is_active='online' WHERE user_id={$user_id}";
         $this->db->query($sql);
+	}
+
+	public function getCountUser()
+	{
+		$this->db->select('id_user');
+		$this->db->from('users');
+		return $this->db->count_all_results();
 	}
 
 

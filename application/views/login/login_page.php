@@ -9,11 +9,10 @@
     <div class="d-flex justify-content-center">
         <div class="container m-4 pb-5">
             <div class="d-flex mt-5 justify-content-center">
-
                 <div class="col-sm-9">
                     <?php if ($this->session->flashdata('message')): ?>
                     <div class="alert alert-danger" role="alert">
-                        <?php echo $this->session->flashdata('message'); ?>
+					<?php echo $this->session->flashdata('message'); ?>
                     </div>
                     <?php endif; ?>
 
@@ -27,7 +26,8 @@
                                 <div class="col-sm-6">
                                     <div class="">
                                         <h1>
-                                            <center><b>REKAM-MEDIS</b></center>
+											<center><b>REKAM-MEDIS</b></center>
+											
                                         </h1>
                                         <hr>
                                         <p>Selamat Datang Kembali, silahkan login ke akun anda</p>
@@ -45,10 +45,6 @@
                                             <div class="form-group">
                                                 <div class="d-flex justify-content-between">
                                                     <div class="custom-control custom-checkbox">
-                                                        <!-- <input type="checkbox" class="custom-control-input"
-                                                            name="rememberme" id="rememberme" />
-                                                        <label class="custom-control-label" for="rememberme"> Ingat
-                                                            Saya</label> -->
                                                     </div>
                                                     <a href="<?= site_url('lupa_password') ?>">Lupa Password?</a>
                                                 </div>

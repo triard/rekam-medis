@@ -10,17 +10,17 @@
 
 		$this->load->library('form_validation');
 		$this->load->model("m_account");
+		$this->load->library('session');
 		
     }
 
-   
      public function index()  
      {  
          
          $this->form_validation->set_rules('email', 'Email', 'required|valid_email');   
          
          if($this->form_validation->run() == FALSE) {  
-             $data['title'] = 'Halaman Reset Password | Tutorial reset password CodeIgniter @ https://recodeku.blogspot.com';  
+             $data['title'] = 'Rekam Medis';  
              $this->load->view('login/v_lupa_password',$data);  
          }else{  
              $email = $this->input->post('email');   
@@ -28,12 +28,10 @@
              $userInfo = $this->m_account->getUserInfoByEmail($clean);  
                
              if(!$userInfo){  
-               $this->session->set_flashdata('sukses', 'email address salah, silakan coba lagi.');  
+               $this->session->set_flashdata('message', 'email tidak ditemukan, silakan coba lagi.');  
                redirect(site_url('login'),'refresh');   
              }    
 			
-//			 var_dump($userInfo->user_id);die;
-			 //build token
 			 $token = $this->m_account->insertToken($userInfo->user_id);   
             
 
@@ -71,26 +69,14 @@
 				$this->email->message($message);
 				if($this->email->send())
 				{
-					echo "<html>";
-					echo "<head>";
-					$this->load->view("_partials/head.php");
-					echo "</head>";
-					echo "<body>";
-					echo "<p align=\"center\">Silahkan cek email <b>".$this->input->post('email').'</b> untuk melakukan reset password.';
-					echo "</body>";
-					echo "</html>";
-
-				}else
-				{
-					echo "Berhasil melakukan registrasi, gagal mengirim verifikasi email";
+					$this->session->set_flashdata('message', 'Silahkan cek email '.$this->input->post('email').' untuk melakukan reset password');
+					redirect(site_url('login'));
+				}else{
+					$this->session->set_flashdata('message', 'Berhasil melakukan registrasi, gagal mengirim verifikasi email');
+					redirect(site_url('login'));
 				}
-
-
-//             echo $message; //send this through mail  
              exit;  
-           
-         }  
-         
+         }   
      }  
    
      public function reset_password()  
@@ -101,7 +87,7 @@
        $user_info = $this->m_account->isTokenValid($cleanToken); //either false or array();          
          
        if(!$user_info){  
-         $this->session->set_flashdata('sukses', 'Token tidak valid atau kadaluarsa');  
+         $this->session->set_flashdata('message', 'Token tidak valid atau kadaluarsa');  
          redirect(site_url('login'),'refresh');   
        }    
    
@@ -122,7 +108,7 @@
                            
          $post = $this->input->post(NULL, TRUE);          
          $cleanPost = $this->security->xss_clean($post);          
-         $hashed = md5($cleanPost['password']);          
+         $hashed = $cleanPost['password'];          
          $cleanPost['password'] = $hashed;  
          $cleanPost['user_id'] = $user_info->user_id;  
          unset($cleanPost['passconf']);          
@@ -130,7 +116,8 @@
            $this->session->set_flashdata('message', 'Update password gagal.');  
          }else{  
            $this->session->set_flashdata('message', 'Password anda sudah  
-             diperbaharui. Silakan login.');  
+						 diperbaharui. Silakan login.');
+						
          }  
          redirect(site_url('login'),'refresh');         
        }  

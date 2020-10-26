@@ -4,7 +4,10 @@ class Overview extends CI_Controller {
     public function __construct()
     {
 		parent::__construct();
-		$this->load->model("user_model");
+		$this->load->model("pasien_model");
+		$this->load->model("pmasuk_model");
+		$this->load->model("diagnosa_model");
+		$this->load->model("pkeluar_model");
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->model("user_model");
@@ -17,8 +20,13 @@ class Overview extends CI_Controller {
 
 	public function index()
 	{
-        // load view admin/overview.php
-        $this->load->view("rekam_medis/overview");
+		$data['pasien'] = $this->pasien_model->getCountPasien();
+		$data['masuk'] = $this->pmasuk_model->	getCountPasienMasuk();
+		$data['keluar'] = $this->pkeluar_model->getCountPasienKeluar();
+		$data['diagnosa'] = $this->diagnosa_model->	getCountDiagnosa();
+		$data['coba']= $this->pmasuk_model->getMasuk();
+		$data['out']= $this->pkeluar_model->getKeluar();
+        $this->load->view("rekam_medis/overview", $data);
 	}
 
 	public function detail($id)
@@ -44,6 +52,12 @@ class Overview extends CI_Controller {
         if (!$data["users"]) show_404();
         
         $this->load->view("general/edit_form_rekdis", $data);
+	}
+
+	public function allData()
+	{
+		$data['all'] = $this->pkeluar_model->getAllData();
+        $this->load->view("admin/riwayat_pasien", $data);
 	}
 
 }
