@@ -16,15 +16,7 @@
         <div id="content-wrapper">
 
             <div class="container-fluid">
-
-                <!-- 
-        karena ini halaman overview (home), kita matikan partial breadcrumb.
-        Jika anda ingin mengampilkan breadcrumb di halaman overview,
-        silahkan hilangkan komentar (//) di tag PHP di bawah.
-        -->
-                <?php //$this->load->view("admin/_partials/breadcrumb.php") ?>
-
-				<?php if ($this->session->flashdata('message')): ?>
+                <?php if ($this->session->flashdata('message')): ?>
                 <div class="alert alert-success" role="alert">
                     <?php echo $this->session->flashdata('message'); ?>
                 </div>
@@ -37,43 +29,14 @@
                         <div class="card text-white bg-primary o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
-                                    <i class="fas fa-fw fa-comments"></i>
+                                    <i class="fas fa-procedures"></i>
                                 </div>
-                                <div class="mr-5">26 New Messages!</div>
-                            </div>
-                            <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
-                                <span class="float-right">
-                                    <i class="fas fa-angle-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-warning o-hidden h-100">
-                            <div class="card-body">
-                                <div class="card-body-icon">
-                                    <i class="fas fa-fw fa-list"></i>
+                                <div class="mr-5">
+                                    <h5><?php echo $pasien ?> Pasien</h5>
                                 </div>
-                                <div class="mr-5">11 New Tasks!</div>
                             </div>
-                            <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
-                                <span class="float-right">
-                                    <i class="fas fa-angle-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-success o-hidden h-100">
-                            <div class="card-body">
-                                <div class="card-body-icon">
-                                    <i class="fas fa-fw fa-shopping-cart"></i>
-                                </div>
-                                <div class="mr-5">123 New Orders!</div>
-                            </div>
-                            <a class="card-footer text-white clearfix small z-1" href="#">
+                            <a class="card-footer text-white clearfix small z-1"
+                                href="<?php echo site_url('rekam_medis/pasien/list') ?>">
                                 <span class="float-left">View Details</span>
                                 <span class="float-right">
                                     <i class="fas fa-angle-right"></i>
@@ -85,11 +48,52 @@
                         <div class="card text-white bg-danger o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
-                                    <i class="fas fa-fw fa-life-ring"></i>
+                                    <i class="far fa-arrow-alt-circle-right"></i>
                                 </div>
-                                <div class="mr-5">13 New Tickets!</div>
+                                <div class="mr-5">
+                                    <h5><?php echo $masuk ?> Pasien Masuk</h5>
+                                </div>
                             </div>
-                            <a class="card-footer text-white clearfix small z-1" href="#">
+                            <a class="card-footer text-white clearfix small z-1"
+                                href="<?php echo  base_url('rekam_medis/pasien_masuk/list')?>">
+                                <span class="float-left">View Details</span>
+                                <span class="float-right">
+                                    <i class="fas fa-angle-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-success o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="far fa-arrow-alt-circle-left"></i>
+                                </div>
+                                <div class="mr-5">
+                                    <h5><?php echo $keluar ?> Pasien Keluar</h5>
+                                </div>
+                            </div>
+                            <a class="card-footer text-white clearfix small z-1"
+                                href="<?php echo  base_url('rekam_medis/pasien_keluar/list')?>">
+                                <span class="float-left">View Details</span>
+                                <span class="float-right">
+                                    <i class="fas fa-angle-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-danger o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                    <i class="fas fa-diagnoses"></i>
+                                </div>
+                                <div class="mr-5">
+                                    <h5><?php echo $diagnosa ?> Diagnosa</h5>
+                                </div>
+                            </div>
+                            <a class="card-footer text-white clearfix small z-1"
+                                href="<?php echo  base_url('rekam_medis/diagnosa/list')?>">
                                 <span class="float-left">View Details</span>
                                 <span class="float-right">
                                     <i class="fas fa-angle-right"></i>
@@ -102,15 +106,35 @@
                 <!-- Area Chart Example-->
                 <div class="card mb-3">
                     <div class="card-header">
-                        <i class="fas fa-chart-area"></i>
-                        Visitor Stats
+                        <div class="float-left"> <i class="fas fa-chart-area"></i>Pasien Masuk</div>
+                        <div class="float-right"> <i class="fas fa-chart-area"></i>Pasien Keluar</div>
                     </div>
                     <div class="card-body">
-                        <canvas id="myAreaChart" width="100%" height="30"></canvas>
-                    </div>
-                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                </div>
+                        <?php if(!empty($coba)){  ?>
+                        <?php foreach ($coba as $r){ ?>
+                        <?php 
+						$t[] = $r->tanggal;
+            			$j[] = (float) $r->jumlah;	
+						?>
+                        <div class="float-left"><canvas id="myAreaChart1" width="440" height="280"></canvas></div>
+                        <?php } 
+						}else{?>
+						 <div class="float-left"><canvas id="bb" width="440" height="280"></canvas></div>
+                        <?php } ?>
 
+                        <?php if(!empty($out)){  ?>
+                        <?php foreach ($out as $r){ ?>
+                        <?php 
+						$m[] = $r->tanggal;
+            			$s[] = (float) $r->jumlah;	
+						?>
+                        <div class="float-right"><canvas id="myAreaChart2" width="440" height="280"></canvas></div>
+                        <?php }
+						}else{ ?>
+						<div class="float-right"><canvas id="aa" width="440" height="280"></canvas></div>
+						<?php } ?>
+                    </div>
+                </div>
             </div>
             <!-- /.container-fluid -->
 
@@ -128,6 +152,234 @@
     <?php $this->load->view("_partials/modal.php") ?>
     <?php $this->load->view("_partials/js.php") ?>
 
+    <script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily =
+        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#292b2c';
+
+    // Area Chart Example
+    var ctx = document.getElementById("myAreaChart1");
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: <?php echo json_encode($t);?>,
+            datasets: [{
+                label: "Pasien",
+                lineTension: 0.3,
+                backgroundColor: "rgba(2,117,216,0.2)",
+                borderColor: "rgba(2,117,216,1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(2,117,216,1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: <?php echo json_encode($j);?>,
+            }],
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    time: {
+                        unit: 'date'
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 7
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 40,
+                        maxTicksLimit: 5
+                    },
+                    gridLines: {
+                        color: "rgba(0, 0, 0, .125)",
+                    }
+                }],
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+    </script>
+    <script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily =
+        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#292b2c';
+
+    // Area Chart Example
+    var ctx = document.getElementById("myAreaChart2");
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: <?php echo json_encode($m);?>,
+            datasets: [{
+                label: "Pasien",
+                lineTension: 0.3,
+                backgroundColor: "rgba(2,117,216,0.2)",
+                borderColor: "rgba(2,117,216,1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(2,117,216,1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: <?php echo json_encode($s);?>,
+            }],
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    time: {
+                        unit: 'date'
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 7
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 40,
+                        maxTicksLimit: 5
+                    },
+                    gridLines: {
+                        color: "rgba(0, 0, 0, .125)",
+                    }
+                }],
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+	</script>
+	    <script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily =
+        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#292b2c';
+
+    // Area Chart Example
+    var ctx = document.getElementById("aa");
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: "Pasien",
+                lineTension: 0.3,
+                backgroundColor: "rgba(2,117,216,0.2)",
+                borderColor: "rgba(2,117,216,1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(2,117,216,1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [],
+            }],
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    time: {
+                        unit: 'date'
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 7
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 40,
+                        maxTicksLimit: 5
+                    },
+                    gridLines: {
+                        color: "rgba(0, 0, 0, .125)",
+                    }
+                }],
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+	</script>
+		    <script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily =
+        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#292b2c';
+
+    // Area Chart Example
+    var ctx = document.getElementById("bb");
+    var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: "Pasien",
+                lineTension: 0.3,
+                backgroundColor: "rgba(2,117,216,0.2)",
+                borderColor: "rgba(2,117,216,1)",
+                pointRadius: 5,
+                pointBackgroundColor: "rgba(2,117,216,1)",
+                pointBorderColor: "rgba(255,255,255,0.8)",
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(2,117,216,1)",
+                pointHitRadius: 50,
+                pointBorderWidth: 2,
+                data: [],
+            }],
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    time: {
+                        unit: 'date'
+                    },
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 7
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 40,
+                        maxTicksLimit: 5
+                    },
+                    gridLines: {
+                        color: "rgba(0, 0, 0, .125)",
+                    }
+                }],
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+    </script>
 </body>
 
 </html>

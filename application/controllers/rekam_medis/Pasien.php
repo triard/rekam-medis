@@ -36,6 +36,7 @@ class Pasien extends CI_Controller
 
 		if($validation->run()){
 			$pacient->save();
+			helper_log("add", "tambah data pasien");
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
 		 }
 		$this->load->view("rekam_medis/pasien/new_form");
@@ -51,7 +52,8 @@ class Pasien extends CI_Controller
 
         if ($validation->run()) {
             $pasien->update();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
+			$this->session->set_flashdata('success', 'Berhasil disimpan');
+			helper_log("edit", "edit data pasien");
         }
 
         $data["pasien"] = $pasien->getById($id);
@@ -66,6 +68,7 @@ class Pasien extends CI_Controller
         
         if ($this->pasien_model->delete($id)) {
 			$this->session->set_flashdata('message', 'Data berhasil dihapus');
+			helper_log("delete", "hapus data pasien");
             redirect(site_url('rekam_medis/pasien/list'));
         }
     }

@@ -15,9 +15,9 @@ function helper_log($tipe = "", $str = ""){
     elseif(strtolower($tipe) == "edit"){
         $log_tipe  = "edit";
     }
-    else{
+    elseif(strtolower($tipe) == "delete"){
         $log_tipe  = "delete";
-    }
+	}
  
 	// paramter
     $param['log_user']      = $CI->session->userdata('user_logged')->username;
@@ -27,6 +27,6 @@ function helper_log($tipe = "", $str = ""){
     //load model log
     $CI->load->model('m_log');
  
-    //save to database
+    //save to database 
     $CI->m_log->save_log($param);
 }

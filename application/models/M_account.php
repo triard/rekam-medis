@@ -76,7 +76,7 @@
    public function updatePassword($post)  
    {    
      $this->db->where('user_id', $post['user_id']);  
-     $this->db->update('users', array('password' => md5($post['password'])));      
+     $this->db->update('users', array('password' => password_hash($post['password'], PASSWORD_DEFAULT)));      
      return true;  
    }   
    //End: method tambahan untuk reset code  

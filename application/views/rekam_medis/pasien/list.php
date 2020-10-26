@@ -27,7 +27,11 @@
 
                 <!-- DataTables -->
                 <div class="card mb-3">
+
                     <div class="card-header">
+					<div class="float-lg-right">
+						<a class="btn btn-success"  href=""><i class="fa fa-print" aria-hidden="true"></i> Cetak Laporan</a>
+					</div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

@@ -39,8 +39,8 @@
                                             <label for="email">Email</label>
                                             <input type="text" class="form-control" name="email"
                                                 value="<?php echo set_value('email'); ?>"
-																								placeholder="masukkan emailmu" required />
-																								<p> <?php echo form_error('email'); ?> </p>
+												placeholder="masukkan emailmu" required />
+											<p> <?php echo form_error('email'); ?> </p>
                                         </div>
                                         <p>
                                             <input class="btn btn-success"  type="submit" name="btnSubmit" value="Submit" />

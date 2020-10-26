@@ -37,6 +37,7 @@ class User extends CI_Controller
 		if($validation->run()){
 			$users->save();
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
+			helper_log("add", "tambah data user");
 		}
 		$this->load->view("admin/users/new_form");
 	}
@@ -51,7 +52,8 @@ class User extends CI_Controller
 
         if ($validation->run()) {
             $users->update();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
+			$this->session->set_flashdata('success', 'Berhasil disimpan');
+			helper_log("edit", "edit data user");
         }
 
         $data["users"] = $users->getById($id);
@@ -70,7 +72,8 @@ class User extends CI_Controller
 
         if ($validation->run()) {
             $users->update();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
+			$this->session->set_flashdata('success', 'Berhasil disimpan');
+			helper_log("edit", "edit profile admin");
         }
 
         $data["users"] = $users->getById($id);
@@ -84,6 +87,7 @@ class User extends CI_Controller
         if (!isset($id)) show_404();
         
         if ($this->user_model->delete($id)) {
+			helper_log("delete", "hapus data user");
             redirect(site_url('admin/user/list'));
         }
     }
