@@ -31,7 +31,9 @@
                     <div class="card-body">
 
                         <form action="<?php echo site_url('admin/user/add') ?>" method="post"
-                            enctype="multipart/form-data">
+							enctype="multipart/form-data">
+							<input type="hidden" name="bulan_buat" value="<?php $bln=date("m"); echo $bln; ?>" />
+							<input type="hidden" name="status" value="verification" />
                             <div class="form-group">
                                 <label for="nama_user">Nama Lengkap*</label>
                                 <input class="form-control <?php echo form_error('nama_user') ? 'is-invalid':'' ?>"
@@ -98,6 +100,20 @@
                             </div>
 
 							<div class="form-group">
+                                <label for="agama">Agama*</label>
+                                <form>
+                                    <select name="agama" class="custom-select" required>
+                                        <option selected>Agama</option>
+                                        <option value="ISLAM">ISLAM</option>
+                                        <option value="PROTESTAN">PROTESTAN</option>
+                                        <option value="KATOLIK">KATOLIK</option>
+                                        <option value="BUDDHA">BUDDHA</option>
+                                        <option value="HINDU">HINDU</option>
+                                        <option value="KHONGHUCU">KHONGHUCU</option>
+                                    </select>
+								</div>
+
+							<div class="form-group">
                                 <label for="jk_user">Jenis Kelamin*</label><br>
                                 <div class="custom-control custom-radio">
                                     <input type="radio"  name="jk_user" value="LAKI-LAKI" required> Laki-laki<br>
@@ -135,7 +151,7 @@
                                 </div>
 							</div>
 							
-							<input type="hidden" name="is_active" value="0" />
+							<input type="hidden" name="is_active" value="offline" />
 
 							<div class="form-group">
                                 <label for="image">Photo*</label>

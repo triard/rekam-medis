@@ -39,7 +39,9 @@
                                 cellspacing="0">
                                 <thead>
                                     <tr>
+									<th>id</th>
 										<th>Nama Ruanangan</th>
+										<th>Level</th>
 										<th>Nomor Ruangan</th>
 										<th>Status Ruangan</th>
                                         <th>Aksi</th>
@@ -48,6 +50,12 @@
                                 <tbody>
                                     <?php foreach ($nomor as $r): ?>
                                     <tr>
+									<td>
+									<?php echo $r->id_ruangan  ?>
+									</td>
+									<td>
+									<?php echo $r->nama  ?>
+									</td>
 									<td>
                                             <?php echo $r->nama_ruangan ?>
 										</td>

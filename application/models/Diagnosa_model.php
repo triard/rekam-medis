@@ -38,10 +38,10 @@ class Diagnosa_model extends CI_Model
 
 	public function getAll()
 	{
-		$this->db->select('*');
+		$this->db->select('p.nama_user,ps.nomor_rekam_medis,d.nama_penyakit,d.tindakan,d.nama_obat,d.id_diagnosa,ps.id_pasien_masuk,d.bulan_buat');
         $this->db->from('diagnosa as d');
 		$this->db->join('pasien_masuk as ps', 'd.id_pasien_masuk = ps.id_pasien_masuk');
-		$this->db->join('pasien as p','ps.id_pasien = p.id_pasien');
+		$this->db->join('users as p','ps.id_pasien = p.user_id');
          return $this->db->get()->result();
 	}
 
@@ -90,7 +90,7 @@ class Diagnosa_model extends CI_Model
 		$this->db->select("*");
 		$this->db->from('diagnosa as d');
 		$this->db->join('pasien_masuk as ps', 'd.id_pasien_masuk = ps.id_pasien_masuk');
-		$this->db->join('pasien as p','ps.id_pasien = p.id_pasien');
+		$this->db->join('users as p','ps.id_pasien = p.user_id');
 		$this->db->where('d.bulan_buat', $this->input->post('bulan'));
 		$this->db->where('d.tahun_buat', $this->input->post('tahun'));
         $getData = $this->db->get();
@@ -104,7 +104,7 @@ class Diagnosa_model extends CI_Model
 		$this->db->select("*");
 		$this->db->from('diagnosa as d');
 		$this->db->join('pasien_masuk as ps', 'd.id_pasien_masuk = ps.id_pasien_masuk');
-		$this->db->join('pasien as p','ps.id_pasien = p.id_pasien');
+		$this->db->join('users as p','ps.id_pasien = p.user_id');
         $this->db->where('d.tgl_buat', $this->input->post('tanggal'));
         $getData = $this->db->get();
         if($getData->num_rows() > 0)
@@ -117,7 +117,7 @@ class Diagnosa_model extends CI_Model
 		$this->db->select("*");
 		$this->db->from('diagnosa as d');
 		$this->db->join('pasien_masuk as ps', 'd.id_pasien_masuk = ps.id_pasien_masuk');
-		$this->db->join('pasien as p','ps.id_pasien = p.id_pasien');
+		$this->db->join('users as p','ps.id_pasien = p.user_id');
         $this->db->where('d.tahun_buat', $this->input->post('tahun'));
         $getData = $this->db->get();
         if($getData->num_rows() > 0)

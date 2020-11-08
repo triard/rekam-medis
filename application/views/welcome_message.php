@@ -6,13 +6,14 @@
     <!-- Image and text -->
     <div id="page-top"></div>
     <nav class="navbar navbar-dark bg-dark text-white">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="<?php echo base_url('/') ?>">
             <img src="assets/images/logo/hospital-32.png" width="30" height="30" class="d-inline-block align-top"
                 alt="">
             Rekam Medis
         </a>
         <ul class="navbar-nav mr-auto"></ul>
-        <a href="<?= site_url('login') ?>" class="btn btn-danger text-white">Login</a>
+        <a href="<?= site_url('login') ?>" class="btn btn-danger text-white m-1 btn-sm"><i class="fas fa-sign-in-alt"></i> Login</a>
+		<a href="<?= site_url('login/register') ?>" class="btn btn-danger text-white m-1 btn-sm"><i class="fas fa-user-plus"></i> Register</a>
     </nav>
     <!-- load carousel -->
     <?php $this->load->view("_partials/carousel.php") ?>

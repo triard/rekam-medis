@@ -39,7 +39,6 @@
 									</button>
 									<?php $this->load->view("admin/pasien_keluar/_partials/_modal.php") ?>
                                 </div>
-
                             </div>
                        
                         <div class="table-responsive">
@@ -59,7 +58,7 @@
                                 <tbody>
                                     <?php foreach ($keluar as $r): ?>
                                     <tr>
-                                        <td width="150"><?php echo $r->nama_pasien ?></td>
+                                        <td width="150"><?php echo $r->nama_user ?></td>
                                         <td width="150"><?php echo $r->nomor_rekam_medis ?></td>
                                         <td width="100"><?php $d = new DateTime($r->tanggal_keluar);
                                             echo $d->format("d/m/Y");?></td>

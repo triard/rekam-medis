@@ -39,23 +39,28 @@
                                 cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th>id_level</th>
                                         <th>Nama Ruangan</th>
-										<th>Level</th>
+                                        <th>Level</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($ruangan as $r): ?>
                                     <tr>
+                                        <td width="50">
+                                            <?php echo $r->id_kelas ?>
+                                        </td>
                                         <td width="150">
                                             <?php echo $r->nama_ruangan ?>
                                         </td>
-										<td width="100">
-										<?php echo $r->nama ?>
-										</td>
+                                        <td width="100">
+                                            <?php echo $r->nama ?>
+                                        </td>
                                         <td width="300" style="text-align: center;">
                                             <a class="btn btn-outline-primary btn-sm" data-toggle="modal"
-                                                data-target="#editRuangan<?=$r->id_ruangan?>"><i class="fas fa-edit"></i>Edit</a>
+                                                data-target="#editRuangan<?=$r->id_ruangan?>"><i
+                                                    class="fas fa-edit"></i>Edit</a>
                                             <a class="btn btn-outline-danger btn-sm"
                                                 href="<?php echo site_url('admin/ruangan/delete/'.$r->id_ruangan) ?>"
                                                 onclick="return confirm('Yakin Data Ini Akan Dihapus');"

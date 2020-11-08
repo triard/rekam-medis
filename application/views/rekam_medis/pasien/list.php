@@ -27,11 +27,11 @@
 
                 <!-- DataTables -->
                 <div class="card mb-3">
-
                     <div class="card-header">
-					<div class="float-lg-right">
-						<a class="btn btn-success"  href=""><i class="fa fa-print" aria-hidden="true"></i> Cetak Laporan</a>
-					</div>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                            Cetak Laporan
+						</button>
+						<?php $this->load->view("rekam_medis/pasien/_modal.php") ?>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -49,23 +49,23 @@
                                     <?php foreach ($pacient as $pacient): ?>
                                     <tr>
                                         <td width="150">
-                                            <?php echo $pacient->nama_pasien ?>
+                                            <?php echo $pacient->nama_user ?>
                                         </td>
                                         <td>
-                                            <?php echo $pacient->no_KTP ?>
+                                            <?php echo $pacient->no_ktp ?>
                                         </td>
                                         <td>
-                                            <?php echo $pacient->jenis_kelamin ?>
+                                            <?php echo $pacient->jk_user ?>
                                         </td>
                                         <td width="300" style="text-align: center;">
-                                            <a href="<?php echo site_url('rekam_medis/pasien/detail/'.$pacient->id_pasien) ?>"
+                                            <a href="<?php echo site_url('rekam_medis/pasien/detail/'.$pacient->user_id) ?>"
                                                 class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i>
                                                 Detail</a>
-                                            <a href="<?php echo site_url('rekam_medis/pasien/edit/'.$pacient->id_pasien) ?>"
+                                            <a href="<?php echo site_url('rekam_medis/pasien/edit/'.$pacient->user_id) ?>"
                                                 class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i>
                                                 Edit</a>
                                             <a class="btn btn-outline-danger btn-sm"
-                                                href="<?php echo site_url('rekam_medis/pasien/delete/'.$pacient->id_pasien) ?>"
+                                                href="<?php echo site_url('rekam_medis/pasien/delete/'.$pacient->user_id) ?>"
                                                 onclick="return confirm('Yakin Data Ini Akan Dihapus');"
                                                 style="color: red"><i class="fas fa-trash"></i>
                                                 Hapus</a>

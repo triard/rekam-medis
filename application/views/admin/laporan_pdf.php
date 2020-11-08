@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <style type="text/css">
@@ -11,7 +10,7 @@
     table {
         margin: auto;
         font-family: "Lucida Sans Unicode", "Lucida Grande", "Segoe Ui";
-        font-size: 12px;
+        font-size: 10px;
 
     }
 
@@ -53,21 +52,51 @@
         text-transform: uppercase;
     }
 
+    .kop-surat a {
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 50%;
+		font-size: 15px;
+    }
+
+    .ttd {
+        font-size: 15px;
+        text-align: right;
+        margin-right: 30px;
+    }
+
+
     /* Table Body */
     </style>
 </head>
 
 <body>
-<?php if($all!= null){ ?>	
-    <center>
-        <h2>Data Riwayat Pasien Rumah Sakit Ibnu Sina</h2>
-    </center>
-    <table class="demo-table responsive">
-	<thead>
+    <?php if($all!= null){ ?>
+    <table>
+        <tr>
+            <td>
+                <img src="<?php echo base_url('assets/images/logo/logo-rsud-ibnu-sina.png') ?>" alt="logo">
+            </td>
+            <td>
+                <div class="kop-surat">
+                    <center>
+                        <a><b>RUMAH SAKIT IBNU SINA BOJONEGORO</b></a><br>
+                        <a>Jl. Lisman No. 07 Campurejo Bojonegoro</a><br>
+                        <a>Telp/Fax (0353) 883238/880835</a><br>
+                        <a>Email : rs.ibnusinabjnjatim@yahoo.co.id</a><br>
+                    </center>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <width="70" height="50">
+		</hr>
+		<center><h4>Data Riwayat Pasien Rumah Sakit Ibnu Sina</h4></center>
+        <table class="demo-table responsive">
+            <thead>
             <tr>
-                <th>Nama</th>
+			<th>Nama</th>
                 <th>KTP</th>
-                <th>Tanggal Lahir</th>
                 <th>nomor rekam medis</th>
                 <th>nomor (ruangan)(kelas)</th>
                 <th>tanggal masuk</th>
@@ -78,15 +107,14 @@
                 <th>obat</th>
                 <th>kondisi keluar</th>
                 <th>status pulang</th>
-
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <?php foreach ($all as $r): ?>
             <tr>
-                <td><?php echo $r->nama_pasien ?></td>
-                <td><?php echo $r->no_KTP ?></td>
-                <td><?php echo $r->tgl_lahir_pasien?>
+                <td><?php echo $r->nama_user ?></td>
+                <td><?php echo $r->no_ktp ?></td>
+                <td><?php echo $r->tgl_lahir?>
                 </td>
 				<td><?php echo $r->nomor_rekam_medis?></td>
 				<td><?php echo $r->nomor_ruangan?>
@@ -107,10 +135,61 @@
                 <td><?php echo $r->status_pulang?></td>
             </tr>
 			<?php endforeach; ?>
-			<?php }else{ ?>
-				<p>Maaf data yang anda cari tidak ada</p>
-			<?php } ?>
-    </table>
+                <?php }else{ ?>
+                <p>Maaf data yang anda cari tidak ada</p>
+                <?php } ?>
+        </table> <br><br>
+        <?php
+							
+							function hari_ini(){
+								$hari = date ("D");
+							 
+								switch($hari){
+									case 'Sun':
+										$hari_ini = "Minggu";
+									break;
+									case 'Mon':			
+										$hari_ini = "Senin";
+									break;
+									case 'Tue':
+										$hari_ini = "Selasa";
+									break;
+									case 'Wed':
+										$hari_ini = "Rabu";
+									break;
+									case 'Thu':
+										$hari_ini = "Kamis";
+									break;
+									case 'Fri':
+										$hari_ini = "Jumat";
+									break;
+									case 'Sat':
+										$hari_ini = "Sabtu";
+									break;
+									default:
+										$hari_ini = "Tidak di ketahui";		
+									break;
+								}
+								return "" . $hari_ini . "";
+							}
+							function tgl_indo($tanggal){
+								$bulan = array (
+									1 =>   'Januari',
+									'Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'
+								);
+								$pecahkan = explode('-', $tanggal); 
+								return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+							}
+							
+							?>
+        <div class="ttd">
+            <a><?php echo hari_ini().', ';
+		echo  tgl_indo(date('Y-m-d'));date('l'); ?></a>
+            <p>Mengetahui</p>
+            <br><br><br>
+            <p>...........................................</p>
+            <p>Direktur RS Ibnu Sina</p>
+        </div>
 </body>
 
 </html>

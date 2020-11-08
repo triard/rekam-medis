@@ -33,9 +33,12 @@
                             <a class="btn btn-primary btn-sm"
                                 href="<?php echo site_url('rekam_medis/diagnosa/list_masuk') ?>"><i
                                     class="fas fa-plus"></i> Tambah Diagnosa</a>
-                            <div class="float-lg-right">
-                                <a class="btn btn-success" href=""><i class="fa fa-print" aria-hidden="true"></i> Cetak
-                                    Laporan</a>
+									<div class="float-lg-right">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#myModal">
+                                    Cetak Laporan
+                                </button>
+								<?php $this->load->view("rekam_medis/diagnosa/_partials/_modal.php") ?>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -55,7 +58,7 @@
                                     <?php foreach ($diagnosa as $r): ?>
                                     <tr>
                                         <td width="150">
-                                            <?php echo $r->nama_pasien ?>
+                                            <?php echo $r->nama_user ?>
                                         </td>
                                         <td width="150">NO.
                                             <?php echo $r->nomor_rekam_medis ?>

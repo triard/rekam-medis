@@ -3,7 +3,8 @@ class Pasien_masuk extends CI_Controller
 {
     public function __construct()
     {
-        parent::__construct();
+		parent::__construct();
+		$this->load->library('pdf');
 		$this->load->model("pmasuk_model");
 		$this->load->model("pasien_model");
 		$this->load->model("user_model");
@@ -83,5 +84,34 @@ class Pasien_masuk extends CI_Controller
 			helper_log("delete", "hapus data pasien masuk");
 			redirect(site_url('rekam_medis/pasien_masuk/list'));
         }
-    }
+	}
+	
+	public function laporan_pdf(){
+		$data['masuk'] = $this->pmasuk_model->cari_bulan();
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "laporan-data-pasien-masuk.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('rekam_medis/pasien_masuk/laporan_pdf', $data);	
+	}
+	public function laporan_pdf1(){
+		$data['masuk'] = $this->pmasuk_model->cari_tanggal();
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "laporan-data-pasien-masuk.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('rekam_medis/pasien_masuk/laporan_pdf', $data);	
+	}
+	public function laporan_pdf2(){
+		$data['masuk'] = $this->pmasuk_model->cari_tahun();
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "laporan-data-pasien-masuk.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('rekam_medis/pasien_masuk/laporan_pdf', $data);	
+	}
+	public function laporan_pdfAll(){
+		$data['masuk'] = $this->pmasuk_model->getAll();
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "laporan-data-pasien-masuk.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('rekam_medis/pasien_masuk/laporan_pdf', $data);	
+	}
 }

@@ -19,12 +19,11 @@
 
                 <?php $this->load->view("_partials/breadcrumb.php") ?>
 
-                <!-- Card  -->
-                <div class="card mb-3">
+				<!-- Card  -->
+				<div class="card mb-3">
                     <div class="card-header">
 
-                        <a class="btn btn-warning btn-sm text-white"
-                            href="<?php echo site_url('rekam_medis/pasien/list/') ?>"><i class="fas fa-arrow-left"></i>
+                        <a class="btn btn-warning btn-sm text-white" href="<?php echo site_url('rekam_medis/pasien/list/') ?>"><i class="fas fa-arrow-left"></i>
                             Kembali</a>
                     </div>
                     <div class="card-body">
@@ -35,41 +34,39 @@
                                         <th></th>
                                         <th></th>
                                     </tr>
-                                </thead>
-                                <tbody>
+								</thead>
+								<tbody>
                                     <tr>
-                                        <th>Nama Lengkap</th>
-                                        <td><?php echo $pasien->nama_pasien?></td>
+										<th width="200">Nama Lengkap</th>
+										<td width="50">:</td>
+                                        <td><?php echo $profile->nama_user?></td>
                                     </tr>
                                     <tr>
-                                        <th>No KTP</th>
-                                        <td><?php echo $pasien->no_KTP?></td>
+										<th>Username</th>
+										<td width="50">:</td>
+                                        <td><?php echo $profile->username?></td>
+                                    </tr>
+                                    <tr>
+										<th>Email</th>
+										<td width="50">:</td>
+                                        <td><?php echo $profile->email?></td>
+                                    </tr>
+                                    <tr>
+										<th>Role</th>
+										<td width="50">:</td>
+                                        <td><?php echo $profile->role?></td>
                                     </tr>
                                     <tr>
                                         <th>Tanggal Lahir</th>
-                                        <td><?php echo date("d F Y", strtotime($pasien->tgl_lahir_pasien)) ;?></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Jenis Kelamin</th>
-                                        <td><?php echo $pasien->jenis_kelamin?></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Alamat</th>
-                                        <td><?php echo $pasien->alamat_pasien?></td>
-                                    </tr>
-                                    <tr>
-                                        <th>No Telp.</th>
-                                        <td><?php echo $pasien->no_telp_pasien?></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Agama</th>
-                                        <td><?php echo $pasien->agama_pasien?></td>
-                                    </tr>
-                                    <tr>
+										<td width="50">:</td>
+										<td><?php echo $profile->tgl_lahir?></td>
+									</tr>
+									<tr>
 										<th>Usia</th>
+										<td width="50">:</td>
 										<td>
                                         <?php
-											$birthday = $pasien->tgl_lahir_pasien;
+											$birthday = $profile->tgl_lahir;
 											$biday = new DateTime($birthday);
 											$today = new DateTime();
 											$diff = $today->diff($biday);
@@ -77,12 +74,45 @@
 										?>
 										</td>
                                     </tr>
+                                    <tr>
+                                        <th>Tempat Lahir</th>
+										<td width="50">:</td>
+										<td><?php echo $profile->tempat_lahir?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jenis Kelamin</th>
+										<td width="50">:</td>
+										<td><?php echo $profile->jk_user?></td>
+                                    </tr>
+                                    <tr>
+										<th>No KTP</th>
+										<td width="50">:</td>
+                                        <td><?php echo $profile->no_ktp?></td>
+                                    </tr>
+                                    <tr>
+										<th>No Telp.</th>
+										<td width="50">:</td>
+                                        <td><?php echo $profile->no_telp?></td>
+                                    </tr>
+                                    <tr>
+										<th>Alamat</th>
+										<td width="50">:</td>
+                                        <td><?php echo $profile->alamat?></td>
+                                    </tr>
+                                    <tr>
+										<th>Agama</th>
+										<td width="50">:</td>
+                                        <td><?php echo $profile->agama?></td>
+									</tr>
+									
 									<tr>
-                                        <th>Photo KTP</th>
+										<th>Photo KTP</th>
+										<td width="50">:</td>
                                         <td>
-										<img class="img-thumbnail" src="<?php echo base_url('assets/images/pasien/'.$pasien->image) ?>" width="50%"  alt="<?php $pasien->nama_pasien ?>" />	
+										<img class="img-thumbnail" src="<?php echo base_url('assets/images/user/'.$profile->image) ?>" width="50%"  alt="<?php $profile->username ?>" />	
 										</td>
                                     </tr>
+                                </tbody>
                                 </tbody>
                             </table>
                         </div>

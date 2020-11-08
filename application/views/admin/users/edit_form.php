@@ -39,6 +39,8 @@
 							<input type="hidden" name="user_id" value="<?php echo $users->user_id?>" />
 							<input type="hidden" name="is_active" value="<?php echo $users->is_active?>" />
 							<input type="hidden" name="password" value="<?php echo $users->password?>" />
+							<input type="hidden" name="bulan_buat" value="<?php echo $users->bulan_buat ?>" />
+							<input type="hidden" name="status" value="<?php echo $users->status ?>" />
 							<div class="form-group">
 							<label for="nama_user">Nama Lengkap*</label>
                                 <input class="form-control <?php echo form_error('nama_user') ? 'is-invalid':'' ?>"
@@ -133,6 +135,19 @@
                                 </div>
 							</div>
 
+							<div class="form-group">
+                                <label for="agama">Agama*</label>
+                                <form>
+                                    <select name="agama" class="custom-select">
+                                        <option value="<?php echo $users->agama ?>" selected><?php echo $users->agama ?></option>
+                                        <option value="ISLAM">ISLAM</option>
+                                        <option value="PROTESTAN">PROTESTAN</option>
+                                        <option value="KATOLIK">KATOLIK</option>
+                                        <option value="BUDDHA">BUDDHA</option>
+                                        <option value="HINDU">HINDU</option>
+                                        <option value="KHONGHUCU">KHONGHUCU</option>
+                                    </select>
+							</div>
 
 							<div class="form-group">
 								<label for="name">Photo</label><br>

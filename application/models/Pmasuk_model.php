@@ -35,26 +35,37 @@ class Pmasuk_model extends CI_Model
 
 	public function getAll()
 	{
-		$this->db->select('ps.id_pasien_masuk, ,  ps.nomor_rekam_medis,ps.tanggal_masuk,
-		ps.keterangan_pasien,p.nama_pasien,nr.id_nomor_ruangan,nr.id_ruangan,nr.nomor_ruangan,
-		nr.status_ruangan,r.id_ruangan,pk.status_pulang,r.nama_ruangan,p.id_pasien');
-        $this->db->from('pasien as p');
-		$this->db->join('pasien_masuk as ps', 'p.id_pasien = ps.id_pasien');
+		$this->db->select('ps.id_pasien_masuk, ps.nomor_rekam_medis,ps.tanggal_masuk,
+		ps.keterangan_pasien,p.nama_user,nr.id_nomor_ruangan,nr.id_ruangan,nr.nomor_ruangan,
+		nr.status_ruangan,r.id_ruangan,pk.status_pulang,r.nama_ruangan,
+		p.user_id,ps.bulan_buat, ps.status_input, l.nama');
+        $this->db->from('users as p');
+		$this->db->join('pasien_masuk as ps', 'p.user_id = ps.id_pasien');
 		$this->db->join('nomor_ruangan as nr','ps.id_nomor_ruangan = nr.id_nomor_ruangan');
 		$this->db->join('ruangan as r','nr.id_ruangan = r.id_ruangan');
 		$this->db->join('pasien_keluar as pk','ps.id_pasien_masuk = pk.id_pasien_masuk','left');
+		$this->db->join('level as l','r.id_kelas = l.id');
 		return $this->db->get()->result();
-		// $query1 = $this->db->get_compiled_select();
+	}
 
-		// $this->db->select('*');
-		// $this->db->from('pasien as p');
-		// $this->db->join('pasien_masuk as ps', 'p.id_pasien = ps.id_pasien');
-		// $this->db->join('nomor_ruangan as nr','ps.id_nomor_ruangan = nr.id_nomor_ruangan');
-		// $this->db->join('ruangan as r','nr.id_ruangan = r.id_ruangan');
-		// $this->db->join('pasien_keluar as pl','ps.id_pasien_masuk = pl.id_pasien_masuk','right');
-		// $query2 = $this->db->get_compiled_select();
-		
-		// return $this->db->query($query1.' UNION '. $query2)->result();
+	public function getPas()
+	{
+		$this->db->select('ps.id_pasien_masuk, ps.nomor_rekam_medis,ps.tanggal_masuk,
+		ps.keterangan_pasien,p.nama_user,nr.id_nomor_ruangan,nr.id_ruangan,nr.nomor_ruangan,
+		nr.status_ruangan,r.id_ruangan,pk.status_pulang,r.nama_ruangan,p.user_id,ps.bulan_buat,l.nama');
+        $this->db->from('users p');
+		$this->db->join('pasien_masuk as ps', 'p.user_id = ps.id_pasien');
+		$this->db->join('nomor_ruangan as nr','ps.id_nomor_ruangan = nr.id_nomor_ruangan');
+		$this->db->join('ruangan as r','nr.id_ruangan = r.id_ruangan');
+		$this->db->join('pasien_keluar as pk','ps.id_pasien_masuk = pk.id_pasien_masuk','left');
+		$this->db->join('level as l','r.id_kelas = l.id');
+		//  $this->db->where('ps.tahun_buat', $this->input->post('tahun'));
+		$this->db->where('p.user_id',  $this->session->userdata('user_logged')->user_id);
+        $getData = $this->db->get();
+        if($getData->num_rows() > 0)
+        return $getData->result();
+        else
+        return null;
 	}
 
 	public function getRuangan()
@@ -88,6 +99,7 @@ class Pmasuk_model extends CI_Model
 		$this->nomor_rekam_medis = $post["nomor_rekam_medis"];
 		$this->keterangan_pasien = $post["keterangan_pasien"];
 		$this->bulan_buat = $post["bulan_buat"];
+		$this->status_input = $post["status_input"];
 		$this->db->insert($this->_table, $this);
 	}
 
@@ -122,11 +134,11 @@ class Pmasuk_model extends CI_Model
     }
 
 	function cari_bulan() {
-		$this->db->select('ps.id_pasien_masuk, ,  ps.nomor_rekam_medis,ps.tanggal_masuk,
-		ps.keterangan_pasien,p.nama_pasien,nr.id_nomor_ruangan,nr.id_ruangan,nr.nomor_ruangan,
-		nr.status_ruangan,r.id_ruangan,pk.status_pulang,r.nama_ruangan,p.id_pasien');
-        $this->db->from('pasien as p');
-		$this->db->join('pasien_masuk as ps', 'p.id_pasien = ps.id_pasien');
+		$this->db->select('ps.id_pasien_masuk,ps.nomor_rekam_medis,ps.tanggal_masuk,
+		ps.keterangan_pasien,p.nama_user,nr.id_nomor_ruangan,nr.id_ruangan,nr.nomor_ruangan,
+		nr.status_ruangan,r.id_ruangan,pk.status_pulang,r.nama_ruangan');
+        $this->db->from('users as p');
+		$this->db->join('pasien_masuk as ps', 'p.user_id = ps.id_pasien');
 		$this->db->join('nomor_ruangan as nr','ps.id_nomor_ruangan = nr.id_nomor_ruangan');
 		$this->db->join('ruangan as r','nr.id_ruangan = r.id_ruangan');
 		$this->db->join('pasien_keluar as pk','ps.id_pasien_masuk = pk.id_pasien_masuk','left');
@@ -140,11 +152,11 @@ class Pmasuk_model extends CI_Model
 	} 
 	
 	function cari_tanggal() {
-		$this->db->select('ps.id_pasien_masuk, ,  ps.nomor_rekam_medis,ps.tanggal_masuk,
-		ps.keterangan_pasien,p.nama_pasien,nr.id_nomor_ruangan,nr.id_ruangan,nr.nomor_ruangan,
-		nr.status_ruangan,r.id_ruangan,pk.status_pulang,r.nama_ruangan,p.id_pasien');
-        $this->db->from('pasien as p');
-		$this->db->join('pasien_masuk as ps', 'p.id_pasien = ps.id_pasien');
+		$this->db->select('ps.id_pasien_masuk,ps.nomor_rekam_medis,ps.tanggal_masuk,
+		ps.keterangan_pasien,p.nama_user,nr.id_nomor_ruangan,nr.id_ruangan,nr.nomor_ruangan,
+		nr.status_ruangan,r.id_ruangan,pk.status_pulang,r.nama_ruangan');
+        $this->db->from('users as p');
+		$this->db->join('pasien_masuk as ps', 'p.user_id = ps.id_pasien');
 		$this->db->join('nomor_ruangan as nr','ps.id_nomor_ruangan = nr.id_nomor_ruangan');
 		$this->db->join('ruangan as r','nr.id_ruangan = r.id_ruangan');
 		$this->db->join('pasien_keluar as pk','ps.id_pasien_masuk = pk.id_pasien_masuk','left');
@@ -157,15 +169,16 @@ class Pmasuk_model extends CI_Model
 	} 
 	
 	function cari_tahun() {
-		$this->db->select('ps.id_pasien_masuk, ,  ps.nomor_rekam_medis,ps.tanggal_masuk,
-		ps.keterangan_pasien,p.nama_pasien,nr.id_nomor_ruangan,nr.id_ruangan,nr.nomor_ruangan,
-		nr.status_ruangan,r.id_ruangan,pk.status_pulang,r.nama_ruangan,p.id_pasien');
-        $this->db->from('pasien as p');
-		$this->db->join('pasien_masuk as ps', 'p.id_pasien = ps.id_pasien');
+		$this->db->select('ps.id_pasien_masuk,ps.nomor_rekam_medis,ps.tanggal_masuk,
+		ps.keterangan_pasien,p.nama_user,nr.id_nomor_ruangan,nr.id_ruangan,nr.nomor_ruangan,
+		nr.status_ruangan,r.id_ruangan,pk.status_pulang,r.nama_ruangan');
+        $this->db->from('users as p');
+		$this->db->join('pasien_masuk as ps', 'p.user_id = ps.id_pasien');
 		$this->db->join('nomor_ruangan as nr','ps.id_nomor_ruangan = nr.id_nomor_ruangan');
 		$this->db->join('ruangan as r','nr.id_ruangan = r.id_ruangan');
 		$this->db->join('pasien_keluar as pk','ps.id_pasien_masuk = pk.id_pasien_masuk','left');
-         $this->db->where('ps.tahun_buat', $this->input->post('tahun'));
+		 $this->db->where('ps.tahun_buat', $this->input->post('tahun'));
+//		$this->db->where('p.user_id', $this->input->post('user_id'));
         $getData = $this->db->get();
         if($getData->num_rows() > 0)
         return $getData->result();

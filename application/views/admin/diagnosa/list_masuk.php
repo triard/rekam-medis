@@ -50,7 +50,7 @@
 										<?php if($r->status_pulang != "Dipulangkan" AND $r->status_pulang != "Pulang Paksa"){  ?>                                    
 									<tr>
                                         <td>
-                                            <?php echo $r->nama_pasien ?>
+                                            <?php echo $r->nama_user?>
                                         </td>
                                         <td width="150">NO.
                                             <?php echo $r->nomor_ruangan?>(<?php echo $r->nama_ruangan?>)

@@ -1,134 +1,180 @@
 <?php
 class Pasien_model extends CI_Model
 {
-	private $_table = "pasien";
+	private $_table = "users";
 	
-	public $id_pasien;
-	public $nama_pasien;
-	public $no_KTP;
-	public $tgl_lahir_pasien;
-	public $jenis_kelamin;
-	public $alamat_pasien;
-	public $no_telp_pasien;
-	public $agama_pasien;
-	public $image;
+	public $user_id;
+	public $username;
+	public $password;
+	public $nama_user;
+	public $email;
+	public $role;
+	public $tgl_lahir;
+	public $jk_user;
+	public $tempat_lahir;
+	public $no_ktp;
+	public $no_telp;
+	public $alamat;
+	public $image = 'user_no_image.jpg';
+	public $last_login;
+	public $create_at;
+	public $is_active;
+	public $agama;
+	public $status;
 	public $bulan_buat;
 
 
 	public function rules()
 	{
 		return[
-			
-			['field' => 'nama_pasien',
-			'label' => 'nama_pasien',
+			['field' => 'username',
+			'label' => 'username',
 			'rules' => 'required'],
 			
-			['field' => 'no_KTP',
-			'label' => 'no_KTP',
+			['field' => 'password',
+			'label' => 'password',
+			'rules' => 'required'],
+			
+			['field' => 'nama_user',
+			'label' => 'nama_user',
 			'rules' => 'required'],
 
-			['field' => 'tgl_lahir_pasien',
-			'label' => 'tgl_lahir_pasien',
+			['field' => 'email',
+			'label' => 'email',
 			'rules' => 'required'],
 
-			['field' => 'jenis_kelamin',
-			'label' => 'jenis_kelamin',
+			['field' => 'role',
+			'label' => 'role',
 			'rules' => 'required'],
 
-			['field' => 'alamat_pasien',
-			'label' => 'alamat_pasien',
+			['field' => 'tgl_lahir',
+			'label' => 'tgl_lahir',
 			'rules' => 'required'],
 
-			['field' => 'no_telp_pasien',
-			'label' => 'no_telp_pasien',
+			['field' => 'tempat_lahir',
+			'label' => 'tempat_lahir',
 			'rules' => 'required'],
 
-			['field' => 'agama_pasien',
-			'label' => 'agama_pasien',
-			'rules' => 'required']
+			['field' => 'jk_user',
+			'label' => 'jk_user',
+			'rules' => 'required'],
 
-		];	
+			['field' => 'no_ktp',
+			'label' => 'no_ktp',
+			'rules' => 'required'],
+
+			['field' => 'no_telp',
+			'label' => 'no_telp',
+			'rules' => 'required'],
+
+			['field' => 'alamat',
+			'label' => 'alamat',
+			'rules' => 'required'],
+		];
 	}
 
 	public function getAll()
 	{
-		return $this->db->get($this->_table)->result();
+        $this->db->select("*");
+        $this->db->from("users");
+		$this->db->where('role','pasien');
+        $getData = $this->db->get();
+        if($getData->num_rows() > 0)
+        return $getData->result();
+        else
+        return null;
 	}
 
 	public function getById($id)
 	{
-		return $this->db->get_where($this->_table, ["id_pasien"=> $id])->row();
+		return $this->db->get_where($this->_table, ["user_id"=> $id])->row();
 	}
 
 	public function save()
 	{
 		$post= $this->input->post();
-		$this->nama_pasien = $post["nama_pasien"];
-		$this->no_KTP = $post["no_KTP"];
-		$this->tgl_lahir_pasien = $post["tgl_lahir_pasien"];
-		$this->jenis_kelamin = $post["jenis_kelamin"];
-		$this->alamat_pasien = $post["alamat_pasien"];
-		$this->no_telp_pasien = $post["no_telp_pasien"];
-		$this->agama_pasien = $post["agama_pasien"];
-		$this->bulan_buat = $post["bulan_buat"];
-		$this->image = $this-> _uploadImage();
+		$this->username = $post["username"];
+		$this->password = password_hash($post["password"], PASSWORD_DEFAULT);
+		$this->nama_user = $post["nama_user"];
+		$this->email = $post["email"];
+		$this->role = $post["role"];
+		$this->tgl_lahir = $post["tgl_lahir"];
+		$this->tempat_lahir = $post["tempat_lahir"];
+		$this->jk_user = $post["jk_user"];
+		$this->no_ktp = $post["no_ktp"];
+		$this->no_telp = $post["no_telp"];
+		$this->alamat = $post["alamat"];
+		$this->is_active = $post["is_active"];
+		$this->agama = $post["agama"];
+		$this->status = $post["status"];
+		$this->bulan_buat  = $post["bulan_buat"];
+		$this->image = $this->_uploadImage();
 		$this->db->insert($this->_table, $this);
 	}
 
 	public function update()
 	{
 		$post = $this->input->post();
-		$this->id_pasien = $post["id_pasien"];
-		$this->nama_pasien = $post["nama_pasien"];
-		$this->no_KTP = $post["no_KTP"];
-		$this->tgl_lahir_pasien = $post["tgl_lahir_pasien"];
-		$this->jenis_kelamin = $post["jenis_kelamin"];
-		$this->alamat_pasien = $post["alamat_pasien"];
-		$this->no_telp_pasien = $post["no_telp_pasien"];
-		$this->agama_pasien = $post["agama_pasien"];
-		$this->bulan_buat = $post["bulan_buat"];
+		$this->user_id = $post["user_id"];
+		$this->password = $post["password"];
+		// $this->nama_user = password_hash($post["nama_user"],PASSWORD_DEFAULT);
+		$this->nama_user = $post["nama_user"];
+		$this->username = $post["username"];
+		$this->email = $post["email"];
+		$this->role = $post["role"];
+		$this->tgl_lahir = $post["tgl_lahir"];
+		$this->tempat_lahir = $post["tempat_lahir"];
+		$this->jk_user = $post["jk_user"];
+		$this->no_ktp = $post["no_ktp"];
+		$this->no_telp = $post["no_telp"];
+		$this->alamat = $post["alamat"];
+		$this->is_active = $post["is_active"];
+		$this->agama = $post["agama"];
+		$this->status = $post["status"];
+		$this->bulan_buat  = $post["bulan_buat"];
 		if (!empty($_FILES["image"]["name"])) {
 			$this->image = $this->_uploadImage();
 		} else {
 			$this->image = $post["old_image"];
 		}
-		$this->db->update($this->_table, $this, array('id_pasien' => $post['id_pasien']));
+		$this->db->update($this->_table, $this, array('user_id' => $post['user_id']));
 	}
 
 	public function delete($id)		
 	{	
-		return $this->db->delete($this->_table, array("id_pasien" => $id));
+		return $this->db->delete($this->_table, array("user_id" => $id));
 	}
 
 	public function getCountPasien()
 	{
-		$this->db->select('id_pasien');
-		$this->db->from('pasien');
+		$this->db->select('user_id');
+		$this->db->from('users');
+		$this->db->where('role','pasien');
 		return $this->db->count_all_results();
 	}
 
 	private function _uploadImage()
-	{
-		$config['upload_path']          = './assets/images/pasien';
-		$config['allowed_types']        = 'gif|jpg|png';
-		$config['file_name']            = $this->nama_pasien;
-		$config['overwrite']			= true;
-		$config['max_size']             = 1024; // 1MB
-	
-		$this->load->library('upload', $config);
-	
-		if ($this->upload->do_upload('image')) {
-			return $this->upload->data("file_name");
-		}
-		
-		return "default.jpg";
-	}
+{
+    $config['upload_path']          = './assets/images/user';
+    $config['allowed_types']        = 'gif|jpg|png';
+    $config['file_name']            = $this->username;
+    $config['overwrite']			= true;
+    $config['max_size']             = 1024; // 1MB
+
+    $this->load->library('upload', $config);
+
+    if ($this->upload->do_upload('image')) {
+        return $this->upload->data("file_name");
+    }
+    return "default.jpg";
+}
 	
 	function cari_bulan() {
         $this->db->select("*");
-        $this->db->from("pasien");
+        $this->db->from("users");
 		$this->db->where('bulan_buat', $this->input->post('bulan'));
 		$this->db->where('tahun_buat', $this->input->post('tahun'));
+		$this->db->where('role','pasien');
         $getData = $this->db->get();
         if($getData->num_rows() > 0)
         return $getData->result();
@@ -138,8 +184,9 @@ class Pasien_model extends CI_Model
 	
 	function cari_tanggal() {
         $this->db->select("*");
-        $this->db->from("pasien");
-        $this->db->where('tgl_buat', $this->input->post('tanggal'));
+        $this->db->from("users");
+		$this->db->where('tgl_buat', $this->input->post('tanggal'));
+		$this->db->where('role','pasien');
         $getData = $this->db->get();
         if($getData->num_rows() > 0)
         return $getData->result();
@@ -149,8 +196,9 @@ class Pasien_model extends CI_Model
 	
 	function cari_tahun() {
         $this->db->select("*");
-        $this->db->from("pasien");
-        $this->db->where('tahun_buat', $this->input->post('tahun'));
+        $this->db->from("users");
+		$this->db->where('tahun_buat', $this->input->post('tahun'));
+		$this->db->where('role','pasien');
         $getData = $this->db->get();
         if($getData->num_rows() > 0)
         return $getData->result();
@@ -159,15 +207,18 @@ class Pasien_model extends CI_Model
 	} 
 	
 	public function getDataKL(){
-        $query = $this->db->query("SELECT jenis_kelamin AS jk,COUNT(jenis_kelamin) AS jml_jk 
-		FROM pasien
-		GROUP BY jenis_kelamin");          
+		$query = $this->db->query("
+		SELECT jk_user AS jk,COUNT(jk_user) AS jml_jk 
+		FROM users
+		WHERE role = 'pasien'
+		GROUP BY jk_user;
+		");          
         if($query->num_rows() > 0){
             foreach($query->result() as $data){
                 $hasil[] = $data;
             }
             return $hasil;
-        }
+		}
     }
 
 }

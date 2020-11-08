@@ -54,7 +54,7 @@
 	</li>
 	<li class="nav-item">
         <a class="nav-link" href="<?php echo  base_url('admin/overview/allData')?>">
-		<i class="fas fa-note"></i>
+		<i class="fas fa-history"></i>
             <span>Riwayat Pasien</span></a>
 	</li>
 </ul>

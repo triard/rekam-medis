@@ -25,7 +25,7 @@ class Pasien extends CI_Controller
 
 	public function detail($id)
 	{
-		$data['pasien'] = $this->pasien_model->getById($id);
+		$data['profile'] = $this->pasien_model->getById($id);
 		$this->load->view("admin/pasien/detail", $data);
 	}
 
@@ -78,24 +78,43 @@ class Pasien extends CI_Controller
 		$data['pacient'] = $this->pasien_model->cari_bulan();
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('laporan_pdf', $data);	
 	}
 	public function laporan_pdf1(){
 		$data['pacient'] = $this->pasien_model->cari_tanggal();
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('laporan_pdf', $data);	
 	}
 	public function laporan_pdf2(){
 		$data['pacient'] = $this->pasien_model->cari_tahun();
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('laporan_pdf', $data);	
 	}
 	public function laporan_pdfAll(){
 		$data['pacient'] = $this->pasien_model->getAll();
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('laporan_pdf', $data);	
 	}
+
+	public function StatusVer($id)
+	{
+		$sql = "UPDATE users SET status='verification' WHERE user_id={$id}";
+		$this->db->query($sql);
+		redirect('admin/pasien/list');
+	}
+
+	public function StatusUnver($id)
+	{
+		$sql = "UPDATE users SET status='unverification' WHERE user_id={$id}";
+		$this->db->query($sql);
+		redirect('admin/pasien/list');
+	}
 }
+

@@ -19,6 +19,9 @@ class User_model extends CI_Model
 	public $last_login;
 	public $create_at;
 	public $is_active;
+	public $agama;
+	public $status;
+	public $bulan_buat;
 
 	public function rules()
 	{
@@ -71,7 +74,14 @@ class User_model extends CI_Model
 
 	public function getAll()
 	{
-		return $this->db->get($this->_table)->result();
+		$this->db->select("*");
+        $this->db->from("users");
+		$this->db->where('role!=','pasien');
+        $getData = $this->db->get();
+        if($getData->num_rows() > 0)
+        return $getData->result();
+        else
+        return null;
 	}
 
 	public function getById($id)
@@ -95,7 +105,10 @@ class User_model extends CI_Model
 		$this->no_telp = $post["no_telp"];
 		$this->alamat = $post["alamat"];
 		$this->is_active = $post["is_active"];
-		$this->image = $this-> _uploadImage();
+		$this->agama = $post["agama"];
+		$this->status = $post["status"];
+		$this->bulan_buat  = $post["bulan_buat"];
+		$this->image = $this->_uploadImage();
 		$this->db->insert($this->_table, $this);
 	}
 
@@ -104,7 +117,8 @@ class User_model extends CI_Model
 		$post = $this->input->post();
 		$this->user_id = $post["user_id"];
 		$this->password = $post["password"];
-		$this->nama_user = password_hash($post["nama_user"],PASSWORD_DEFAULT);
+		// $this->nama_user = password_hash($post["nama_user"],PASSWORD_DEFAULT);
+		$this->nama_user = $post["nama_user"];
 		$this->username = $post["username"];
 		$this->email = $post["email"];
 		$this->role = $post["role"];
@@ -115,6 +129,9 @@ class User_model extends CI_Model
 		$this->no_telp = $post["no_telp"];
 		$this->alamat = $post["alamat"];
 		$this->is_active = $post["is_active"];
+		$this->agama = $post["agama"];
+		$this->status = $post["status"];
+		$this->bulan_buat  = $post["bulan_buat"];
 		if (!empty($_FILES["image"]["name"])) {
 			$this->image = $this->_uploadImage();
 		} else {
@@ -141,7 +158,6 @@ class User_model extends CI_Model
     if ($this->upload->do_upload('image')) {
         return $this->upload->data("file_name");
     }
-    
     return "default.jpg";
 }
 
@@ -161,6 +177,7 @@ class User_model extends CI_Model
             // periksa role-nya
 			$isAdmin = $user->role == "admin";
 			$isRekdis  = $user->role == "rekam_medis";
+			$isPasien  = $user->role == "pasien";
 
             // jika password benar dan dia admin
             if($isPasswordTrue && $isAdmin){ 
@@ -169,6 +186,11 @@ class User_model extends CI_Model
 				$this->_updateLastLogin($user->user_id);
                 return true;
             }elseif($isPasswordTrue && $isRekdis){
+				$this->session->set_userdata(['user_logged' => $user]);
+				$this->_updateLastLogin($user->user_id);
+				return true;
+			}
+			elseif($isPasswordTrue && $isPasien){
 				$this->session->set_userdata(['user_logged' => $user]);
 				$this->_updateLastLogin($user->user_id);
 				return true;
@@ -192,8 +214,7 @@ class User_model extends CI_Model
 	{
 		$this->db->select('id_user');
 		$this->db->from('users');
+		$this->db->where('role!=','pasien');
 		return $this->db->count_all_results();
 	}
-
-
 }

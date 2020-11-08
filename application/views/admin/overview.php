@@ -181,35 +181,42 @@
 
                     </div>
                 </div>
-                <div class="card mb m-3" style="height: 270px;">
-                    <div class="card-header">
-                        <div class="float-left"> <i class="fas fa-chart-area"></i>Pasien Masuk</div>
-                        <div class="float-right"> <i class="fas fa-chart-area"></i>Pasien Keluar</div>
-                    </div>
-                    <div class="card-body">
-                        <?php if(!empty($coba)){  ?>
+				<div class="card-group m-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left"> <i class="fas fa-chart-line"></i>Pasien Masuk</div>
+                        </div>
+                        <div class="card-body text-center mt-5">
+						<?php if(!empty($coba)){  ?>
                         <?php foreach ($coba as $r){ ?>
                         <?php 
 						$tgl[] = $r->tanggal;
             			$jml[] = (float) $r->jumlah;	
 						?>
-                        <div class="float-left"><canvas id="myAreaChart1" width="440" height="200"></canvas></div>
+                        <div class=""><canvas id="myAreaChart1" width="400" height="100"></canvas></div>
                         <?php } 
 						}else{?>
-                        <div class="float-left"><canvas id="bb" width="440" height="200"></canvas></div>
+                        <div class=""><canvas id="bb" width="400" height="100"></canvas></div>
                         <?php } ?>
-
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class=""> <i class="fas fa-chart-line"></i>Pasien Keluar</div>
+                        </div>
+                        <div class="card-body text-center mt-5">
                         <?php if(!empty($out)){  ?>
                         <?php foreach ($out as $r){ ?>
                         <?php 
 						$m[] = $r->tanggal;
             			$s[] = (float) $r->jumlah;	
 						?>
-                        <div class="float-right"><canvas id="myAreaChart2" width="440" height="200"></canvas></div>
+                        <div class=""><canvas id="myAreaChart2" width="400" height="100"></canvas></div>
                         <?php }
 						}else{ ?>
-                        <div class="float-right"><canvas id="aa" width="440" height="200"></canvas></div>
+                        <div class=""><canvas id="aa" width="400" height="100"></canvas></div>
                         <?php } ?>
+                        </div>
                     </div>
                 </div>
                 <div class="card-group m-3">

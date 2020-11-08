@@ -44,17 +44,17 @@
                                     <?php foreach ($pacient as $p): ?>
                                     <tr>
                                         <td>
-                                            <?php echo $p->nama_pasien ?>
+                                            <?php echo $p->nama_user ?>
                                         </td>
                                         <td>
-                                            <?php echo $p->no_KTP ?>
+                                            <?php echo $p->no_ktp ?>
                                         </td>
                                         <td>
-                                            <?php echo $p->jenis_kelamin ?>
+                                            <?php echo $p->jk_user ?>
                                         </td>
                                         <td width="100" style="text-align: center;">
 										<a class="btn btn-outline-primary btn-sm" data-toggle="modal"
-                                                data-target="#addPasien<?=$p->id_pasien?>"><i class="fas fa-plus"></i>Tambahkan Pasien Masuk</a>
+                                                data-target="#addPasien<?=$p->user_id?>"><i class="fas fa-plus"></i>Tambahkan Pasien Masuk</a>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>

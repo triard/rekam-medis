@@ -12,6 +12,8 @@
  * @link        https://github.com/ardianta/codeigniter-dompdf
  */
 use Dompdf\Dompdf;
+use Dompdf\Options;
+
 class Pdf extends Dompdf{
     /**
      * PDF filename
@@ -42,9 +44,17 @@ class Pdf extends Dompdf{
      */
     public function load_view($view, $data = array()){
         $html = $this->ci()->load->view($view, $data, TRUE);
-        $this->load_html($html);
-        // Render the PDF
-        $this->render();
+        
+		// Render the PDF
+		$options = new Options();
+		$options->set('isRemoteEnabled', TRUE);
+		$options->set('debugKeepTemp', TRUE);
+		$options->set('isHtml5ParserEnabled', true);
+		//$options->set('chroot', '');
+	//	$html = new Dompdf($options);
+		$this->load_html($html);
+		$this->render();
+		$this->stream();
             // Output the generated PDF to Browser
                $this->stream($this->filename, array("Attachment" => false));
     }

@@ -19,7 +19,13 @@ class Level_model extends CI_Model
 
 	public function getAll()
 	{
-		return $this->db->get($this->_table)->result();
+//		return $this->db->get($this->_table)->result();
+		$this->db->select('*');
+		$this->db->from('level');
+		$this->db->group_by('id', 'asc');
+		return $this->db->get()->result();
+		// $query = $this->db->query("SELECT * FROM level GROUP BY id ASC");
+		//  return $query->result();
 	}
 
 	public function getById($id)
@@ -46,12 +52,5 @@ class Level_model extends CI_Model
 	{	
 		return $this->db->delete($this->_table, array("id" => $id));
 	}
-
-	// public function getCountRuangan()
-	// {
-	// 	$this->db->select('id_ruangan');
-	// 	$this->db->from('ruangan');
-	// 	return $this->db->count_all_results();
-	// }
 
 }
