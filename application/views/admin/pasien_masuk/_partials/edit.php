@@ -16,9 +16,9 @@
 				                <form action="<?php echo site_url('admin/pasien_masuk/edit/'.$r->nomor_ruangan)?>"
 				                    method="post" enctype="multipart/form-data">
 				                    <input type="hidden" name="id_pasien_masuk" value="<?php echo $r->id_pasien_masuk?>" />
-				                    <input type="hidden" name="id_pasien" value="<?php echo $r->id_pasien?>" />
+				                    <input type="hidden" name="id_pasien" value="<?php echo $r->user_id?>" />
 									<input type="hidden" name="nomor_rekam_medis" value="<?php echo $r->nomor_rekam_medis?>" />
-									<input type="text" name="bulan_buat" value="<?php echo $r->bulan_buat ?>" />
+									<input type="hidden" name="bulan_buat" value="<?php echo $r->bulan_buat ?>" />
 				                    <div class="form-group">
 				                        <label for="id_nomor_ruangan">Ruangan*</label>
 				                        <select name="id_nomor_ruangan" class="custom-select" required>

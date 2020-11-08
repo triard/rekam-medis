@@ -66,9 +66,9 @@
                                 <tbody>
                                     <?php foreach ($all as $r): ?>
                                     <tr>
-                                        <td><?php echo $r->nama_pasien ?></td>
-                                        <td><?php echo $r->no_KTP ?></td>
-                                        <td><?php echo $r->tgl_lahir_pasien?>
+                                        <td><?php echo $r->nama_user ?></td>
+                                        <td><?php echo $r->no_ktp ?></td>
+                                        <td><?php echo $r->tgl_lahir?>
                                         </td>
                                         <td><?php echo $r->nomor_rekam_medis?></td>
                                         <td><?php echo $r->nomor_ruangan?>

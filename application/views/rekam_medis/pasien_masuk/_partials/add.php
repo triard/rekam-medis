@@ -1,5 +1,5 @@
 <?php $no=0; foreach($pacient as $p): $no++; ?>
-<div class="modal" id="addPasien<?=$p->id_pasien?>">
+<div class="modal" id="addPasien<?=$p->user_id?>">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -15,7 +15,8 @@
 
                 <form action="<?php echo site_url('rekam_medis/pasien_masuk/add') ?>" method="post"
                     enctype="multipart/form-data">
-                    <input type="hidden" name="id_pasien" value="<?php echo $p->id_pasien?>">
+					<input type="hidden" name="id_pasien" value="<?php echo $p->user_id?>">
+					<input type="hidden" name="status_input" value="rek">
                     <div class="form-group">
                         <label for="id_nomor_ruangan">Ruangan*</label>
                         <select name="id_nomor_ruangan" class="custom-select" required>

@@ -13,7 +13,8 @@
             <div class="modal-body">
                 <form action="<?php echo site_url('admin/pasien_keluar/add') ?>" method="post"
                     enctype="multipart/form-data">
-                    <input type="text" name="id_pasien_masuk" value="<?php echo $r->id_pasien_masuk?>">
+					<input type="text" name="id_pasien_masuk" value="<?php echo $r->id_pasien_masuk?>">
+					<input type="text" name="bulan_buat" value="<?php $bln=date("m"); echo $bln; ?>" />
                     <div class="form-group">
                         <label for="kondisi_keluar">kondisi_keluar*</label><br>
                         <div class="custom-control custom-radio">

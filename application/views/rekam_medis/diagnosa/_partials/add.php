@@ -16,6 +16,7 @@
 					enctype="multipart/form-data">
 
 					<input type="hidden" name="id_pasien_masuk" value="<?php echo $r->id_pasien_masuk?>">
+					<input type="hidden" name="bulan_buat" value="<?php $bln=date("m"); echo $bln; ?>" />
                     <div class="form-group">
                         <label for="nama_penyakit">Penyakit</label>
                         <input class="form-control <?php echo form_error('nama_penyakit') ? 'is-invalid':'' ?>"

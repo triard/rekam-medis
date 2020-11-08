@@ -6,6 +6,15 @@
 </head>
 
 <body style="font-family: 'Roboto', sans-serif; background-color: #DEE1E2;">
+<nav class="navbar navbar-dark bg-dark text-white">
+        <a class="navbar-brand" href="<?php echo base_url('/') ?>">
+            <img src="./assets/images/logo/hospital-32.png" width="30" height="30" class="d-inline-block align-top"
+                alt="">
+            Rekam Medis
+        </a>
+        <ul class="navbar-nav mr-auto"></ul>
+        <a href="<?= site_url('login/register') ?>" class="btn btn-danger text-white m-1 btn-sm"><i class="fas fa-user-plus"></i> Register</a>
+    </nav>
     <div class="d-flex justify-content-center">
         <div class="container m-4 pb-5">
             <div class="d-flex mt-5 justify-content-center">
@@ -45,6 +54,7 @@
                                             <div class="form-group">
                                                 <div class="d-flex justify-content-between">
                                                     <div class="custom-control custom-checkbox">
+													<a href="<?= site_url('login/register') ?>">belum punya akun?</a>
                                                     </div>
                                                     <a href="<?= site_url('lupa_password') ?>">Lupa Password?</a>
                                                 </div>

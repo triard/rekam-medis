@@ -22,7 +22,8 @@ class Ruangan_model extends CI_Model
 	{
 		$this->db->select('*');
         $this->db->from('ruangan as r');
-        $this->db->join('level as l', 'r.id_kelas = l.id');
+		$this->db->join('level as l', 'r.id_kelas = l.id');
+
          return $this->db->get()->result();
 	}
 

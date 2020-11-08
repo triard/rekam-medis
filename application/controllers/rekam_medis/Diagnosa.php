@@ -3,7 +3,8 @@ class Diagnosa extends CI_Controller
 {
     public function __construct()
     {
-        parent::__construct();
+		parent::__construct();
+		$this->load->library('pdf');
 		$this->load->model("diagnosa_model");
 		$this->load->model("user_model");
 		$this->load->model("pmasuk_model");
@@ -71,5 +72,34 @@ class Diagnosa extends CI_Controller
 			helper_log("delete", "hapus data diagnosa");
 			redirect(site_url('rekam_medis/diagnosa/list'));
         }
-    }
+	}
+	
+	public function laporan_pdf(){
+		$data['diagnosa'] = $this->diagnosa_model->cari_bulan();
+		$this->pdf->setPaper('A4', 'landscape');
+		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('rekam_medis/diagnosa/laporan_pdf', $data);	
+	}
+	public function laporan_pdf1(){
+		$data['diagnosa'] = $this->diagnosa_model->cari_tanggal();
+		$this->pdf->setPaper('A4', 'landscape');
+		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('rekam_medis/diagnosa/laporan_pdf', $data);	
+	}
+	public function laporan_pdf2(){
+		$data['diagnosa'] = $this->diagnosa_model->cari_tahun();
+		$this->pdf->setPaper('A4', 'landscape');
+		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('rekam_medis/diagnosa/laporan_pdf', $data);	
+	}
+	public function laporan_pdfAll(){
+		$data['diagnosa'] = $this->diagnosa_model->getAll();
+		$this->pdf->setPaper('A4', 'landscape');
+		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('rekam_medis/diagnosa/laporan_pdf', $data);	
+	}
 }

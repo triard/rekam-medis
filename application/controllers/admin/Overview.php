@@ -65,24 +65,28 @@ class Overview extends CI_Controller {
 		$data['all'] = $this->pkeluar_model->cari_bulanAll();
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-data-pasien_keluar.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/laporan_pdf', $data);	
 	}
 	public function laporan_pdf1(){
 		$data['all'] = $this->pkeluar_model->cari_tanggalAll();
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-data-pasien_keluar.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/laporan_pdf', $data);	
 	}
 	public function laporan_pdf2(){
 		$data['all'] = $this->pkeluar_model->cari_tahunAll();
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-data-pasien_keluar.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/laporan_pdf', $data);	
 	}
 	public function laporan_pdfAll(){
 		$data['all'] = $this->pkeluar_model->getAllData();
 		$this->pdf->setPaper('A4', 'landscape');
 		$this->pdf->filename = "laporan-data-pasien_keluar.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/laporan_pdf', $data);	
 	}
 }

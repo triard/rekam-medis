@@ -39,6 +39,7 @@
                                 cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th>id</th>
                                         <th>Level</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -46,6 +47,9 @@
                                 <tbody>
                                     <?php foreach ($level as $r): ?>
                                     <tr>
+                                        <td width="30">
+										<?php echo $r->id ?>
+                                        </td>
                                         <td width="150">
                                             <?php echo $r->nama ?>
                                         </td>

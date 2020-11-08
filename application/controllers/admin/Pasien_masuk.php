@@ -42,6 +42,15 @@ class Pasien_masuk extends CI_Controller
  		$this->load->view("admin/pasien_masuk/list", $data);
 	}
 
+	public function konfirmasi_booked($id)
+	{
+		$sql = "UPDATE nomor_ruangan SET status_ruangan='Booked' WHERE id_nomor_ruangan={$id}";
+		$this->db->query($sql);
+		$data['masuk'] = $this->pmasuk_model->getAll();
+		$data['ruangan'] =  $this->pmasuk_model->getRuangan();
+ 		$this->load->view("admin/pasien_masuk/list", $data);
+	}
+
 	public function add()
 	{
 		$masuk = $this->pmasuk_model;
@@ -64,7 +73,7 @@ class Pasien_masuk extends CI_Controller
 	{       
 		$masuk = $this->pmasuk_model;
         $validation = $this->form_validation; 
-        $validation->set_rules($masuk->rules());
+        $validation->set_rules($masuk->rules()); 
 
         if ($validation->run()) {
             $masuk->update();
@@ -90,24 +99,28 @@ class Pasien_masuk extends CI_Controller
 		$data['masuk'] = $this->pmasuk_model->cari_bulan();
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->filename = "laporan-data-pasien-masuk.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/pasien_masuk/laporan_pdf', $data);	
 	}
 	public function laporan_pdf1(){
 		$data['masuk'] = $this->pmasuk_model->cari_tanggal();
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->filename = "laporan-data-pasien-masuk.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/pasien_masuk/laporan_pdf', $data);	
 	}
 	public function laporan_pdf2(){
 		$data['masuk'] = $this->pmasuk_model->cari_tahun();
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->filename = "laporan-data-pasien-masuk.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/pasien_masuk/laporan_pdf', $data);	
 	}
 	public function laporan_pdfAll(){
 		$data['masuk'] = $this->pmasuk_model->getAll();
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->filename = "laporan-data-pasien-masuk.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/pasien_masuk/laporan_pdf', $data);	
 	}
 }

@@ -30,12 +30,15 @@
                     <div class="card-header">
                         <a class="btn btn-primary btn-sm"
                             href="<?php echo site_url('rekam_medis/pasien_masuk/list_pas') ?>"><i
-								class="fas fa-plus"></i> Tambah Pasien Masuk Baru</a>
-								<div class="float-lg-right">
-						<a class="btn btn-success"  href=""><i class="fa fa-print" aria-hidden="true"></i> Cetak Laporan</a>
-					</div>
-					</div>
-					
+                                class="fas fa-plus"></i> Tambah Pasien Masuk Baru</a>
+                        <div class="float-lg-right">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                Cetak Laporan
+                            </button>
+                            <?php $this->load->view("rekam_medis/pasien_masuk/_partials/_modal.php") ?>
+                        </div>
+                    </div>
+
                     <div class="card-body">
 
                         <div class="table-responsive">
@@ -55,7 +58,7 @@
                                 <tbody>
                                     <?php foreach ($masuk as $r): ?>
                                     <tr>
-                                        <td width=150><?php echo $r->nama_pasien ?></td>
+                                        <td width=150><?php echo $r->nama_user ?></td>
                                         <td width="160"><?php echo $r->nomor_ruangan?> (<?php echo $r->nama_ruangan?>)
                                         </td>
                                         <td width="100"><?php echo $r->nomor_rekam_medis?></td>
@@ -71,14 +74,22 @@
                                             <?php }else if($r->status_ruangan == "Diisi"){ ?>
                                             <button class="btn btn-success btn-sm" title="Terkonfirmasi" disabled><i
                                                     class="icon-remove icon-white"> </i> Terkonfirmasi</button>
-                                            <?php }else if($r->status_ruangan == "Kosong"){ ?>
-                                            <a href="<?php echo site_url('rekam_medis/pasien_masuk/konfirmasi/'.$r->id_nomor_ruangan) ?>"
-                                                onclick="return confirm('Yakin Data Ini Akan Dikonfirmasi');"
-                                                class="btn btn-danger btn-sm" title="Konfirmasi"><i
-                                                    class="icon-list icon-white"> </i> Konfirmasi</a>
-                                            <?php } ?>
+													<?php }else if($r->status_ruangan == "Kosong" && $r->status_input == "pas"){ ?>
+                                                <a href="" disabled class="btn btn-danger btn-sm" title="Konfirmasi"><i
+                                                        class="icon-list icon-white"> </i>Menunggu Kon Pasien</a>
+                                                <?php }else if($r->status_ruangan == "Booking" && $r->status_input == "pas"){ ?>
+													<a href="<?php echo site_url('rekam_medis/pasien_masuk/konfirmasi_booked/'.$r->id_nomor_ruangan) ?>"
+                                                    onclick="return confirm('Yakin Data Ini Akan Dikonfirmasi');"
+                                                    class="btn btn-primary btn-sm" title="Konfirmasi"><i
+                                                        class="icon-list icon-white"> </i> Konfirmasi booked</a>
+                                                <?php }else if($r->status_ruangan == "Kosong" || $r->status_ruangan == "Booked"){ ?>
+                                                <a href="<?php echo site_url('rekam_medis/pasien_masuk/konfirmasi/'.$r->id_nomor_ruangan) ?>"
+                                                    onclick="return confirm('Yakin Data Ini Akan Dikonfirmasi');"
+                                                    class="btn btn-danger btn-sm" title="Konfirmasi"><i
+                                                        class="icon-list icon-white"> </i> Konfirmasi</a>
+                                                <?php } ?>
                                         </td>
-                                        <td width="150" style="text-align: center;">
+                                        <td width="150" style="text-align: center;"> 
                                             <?php if($r->status_pulang != NULL){ ?>
                                             <p>
                                                 <center>no action</center>
@@ -100,7 +111,7 @@
                                         <?php } ?>
                                     </tr>
                                     <?php endforeach; ?>
- 
+
                                 </tbody>
                             </table>
                         </div>

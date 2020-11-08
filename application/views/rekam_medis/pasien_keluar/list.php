@@ -33,8 +33,11 @@
                                 href="<?php echo site_url('rekam_medis/pasien_keluar/list_masuk') ?>"><i
                                     class="fas fa-plus"></i> Tambah Pasien Keluar</a>
                             <div class="float-lg-right">
-                                <a class="btn btn-success" href=""><i class="fa fa-print" aria-hidden="true"></i> Cetak
-                                    Laporan</a>
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#myModal">
+                                    Cetak Laporan
+                                </button>
+                                <?php $this->load->view("rekam_medis/pasien_keluar/_partials/_modal.php") ?>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -54,7 +57,7 @@
                                 <tbody>
                                     <?php foreach ($keluar as $r): ?>
                                     <tr>
-                                        <td width="150"><?php echo $r->nama_pasien ?></td>
+                                        <td width="150"><?php echo $r->nama_user ?></td>
                                         <td width="150"><?php echo $r->nomor_rekam_medis ?></td>
                                         <td width="100"><?php $d = new DateTime($r->tanggal_keluar);
                                             echo $d->format("d/m/Y");?></td>

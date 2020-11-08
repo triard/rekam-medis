@@ -3,11 +3,13 @@ class Pasien extends CI_Controller
 {
     public function __construct()
     {
-        parent::__construct();
+		parent::__construct();
+		
 		$this->load->model("pasien_model");
 		$this->load->model("user_model");
 		$this->load->library('form_validation');
 		$this->load->library('session');
+		$this->load->library('pdf');
 		if($this->user_model->isNotLogin()) redirect(site_url('login'));
 		if ($this->session->userdata('user_logged')->role != "rekam_medis") {
 		$this->session->set_flashdata('message', 'Maaf anda belum login!');
@@ -24,7 +26,7 @@ class Pasien extends CI_Controller
 
 	public function detail($id)
 	{
-		$data['pasien'] = $this->pasien_model->getById($id);
+		$data['profile'] = $this->pasien_model->getById($id);
 		$this->load->view("rekam_medis/pasien/detail", $data);
 	}
 
@@ -71,5 +73,34 @@ class Pasien extends CI_Controller
 			helper_log("delete", "hapus data pasien");
             redirect(site_url('rekam_medis/pasien/list'));
         }
-    }
+	}
+	
+	public function laporan_pdf(){
+		$data['pacient'] = $this->pasien_model->cari_bulan();
+		$this->pdf->setPaper('A4', 'landscape');
+		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('laporan_pdf', $data);	
+	}
+	public function laporan_pdf1(){
+		$data['pacient'] = $this->pasien_model->cari_tanggal();
+		$this->pdf->setPaper('A4', 'landscape');
+		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('laporan_pdf', $data);	
+	}
+	public function laporan_pdf2(){
+		$data['pacient'] = $this->pasien_model->cari_tahun();
+		$this->pdf->setPaper('A4', 'landscape');
+		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('laporan_pdf', $data);	
+	}
+	public function laporan_pdfAll(){
+		$data['pacient'] = $this->pasien_model->getAll();
+		$this->pdf->setPaper('A4', 'landscape');
+		$this->pdf->filename = "laporan-data-pasien.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
+		$this->pdf->load_view('laporan_pdf', $data);	
+	}
 }

@@ -33,8 +33,9 @@ class NoRuangan_model extends CI_Model
 	public function getAll()
 	{
 		$this->db->select('*');
-        $this->db->from('nomor_ruangan as ns');
-        $this->db->join('ruangan as r', 'ns.id_ruangan = r.id_ruangan');
+        $this->db->from('ruangan as r');
+		$this->db->join('nomor_ruangan as nr', 'r.id_ruangan = nr.id_ruangan');
+		$this->db->join('level as l', 'r.id_kelas = l.id');
          return $this->db->get()->result();
 	}
 
@@ -75,12 +76,12 @@ class NoRuangan_model extends CI_Model
 	public function getCountRuangan()
 	{
 		$query = $this->db->query("SELECT l.nama AS level,COUNT(nr.nomor_ruangan) AS jumlah_bed 
-		FROM nomor_ruangan AS nr
-		JOIN ruangan AS r 
-		ON nr.id_ruangan = r.id_ruangan
+		FROM ruangan AS r
+		JOIN nomor_ruangan AS nr 
+		ON r.id_ruangan = nr.id_ruangan
 		JOIN level AS l
 		ON r.id_kelas = l.id
-		GROUP BY l.nama");
+		GROUP BY l.id");
 		 return $query->result();
 	}
 

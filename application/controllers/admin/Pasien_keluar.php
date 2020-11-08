@@ -86,24 +86,28 @@ class Pasien_keluar extends CI_Controller
 		$data['keluar'] = $this->pkeluar_model->cari_bulan();
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->filename = "laporan-data-pasien_keluar.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/pasien_keluar/laporan_pdf', $data);	
 	}
 	public function laporan_pdf1(){
 		$data['keluar'] = $this->pkeluar_model->cari_tanggal();
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->filename = "laporan-data-pasien_keluar.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/pasien_keluar/laporan_pdf', $data);	
 	}
 	public function laporan_pdf2(){
 		$data['keluar'] = $this->pkeluar_model->cari_tahun();
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->filename = "laporan-data-pasien_keluar.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/pasien_keluar/laporan_pdf', $data);	
 	}
 	public function laporan_pdfAll(){
 		$data['keluar'] = $this->pkeluar_model->getAll();
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->filename = "laporan-data-pasien_keluar.pdf";
+		$this->pdf->set_option('isRemoteEnabled', true);
 		$this->pdf->load_view('admin/pasien_keluar/laporan_pdf', $data);	
 	}
 }

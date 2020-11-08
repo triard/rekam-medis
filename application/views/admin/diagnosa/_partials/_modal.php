@@ -11,19 +11,30 @@
 
                                     <!-- Modal body -->
                                     <div class="modal-body">
-                                        <div class="float-lg-right m-4">
-                                            <a class="btn btn-primary btn-sm m-1"
-                                                href="<?php echo site_url('admin/diagnosa/laporan_pdfAll') ?>">Cetak Semua
-                                                Data</a>
+
+                                        <div class="float-lg-lift m-1">
+
+                                            <form class="navbar-form navbar-left" role="search"
+                                                action="<?php echo site_url('admin/diagnosa/laporan_pdf1');?>"
+                                                method="post">
+                                                <div class="form-group">
+                                                    <label for="tahun">Tanggal</label>
+                                                    <input
+                                                        class="form-control form-control-sm <?php echo form_error('tahun') ? 'is-invalid':'' ?>"
+                                                        type="date" name="tanggal" placeholder="tanggal" required />
+                                                </div>
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    Cetak Data Pertanggal</button>
+                                            </form>
                                         </div>
-                                        <div class="float-lg-right m-1">
+                                        <div class="float-lg-lift m-1">
                                             <form class="navbar-form navbar-left" role="search"
                                                 action="<?php echo site_url('admin/diagnosa/laporan_pdf');?>"
                                                 method="post">
                                                 <div class="form-group">
-                                                    <label>Bulan :</label>
+												<label for="tahun">Bulan</label>
                                                     <select name="bulan" class="form-control form-control-sm" required>
-                                                        <option value="">None</option>
+                                                        <option value="">Bulan</option>
                                                         <option value="1">Januari</option>
                                                         <option value="2">Februari</option>
                                                         <option value="3">Maret</option>
@@ -39,7 +50,6 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="tahun">Tahun</label>
                                                     <input
                                                         class="form-control form-control-sm <?php echo form_error('tahun') ? 'is-invalid':'' ?>"
                                                         type="text" name="tahun" placeholder="tahun" required />
@@ -49,26 +59,13 @@
                                                     Cetak Data Perbulan</button>
                                             </form>
                                         </div>
-                                        <div class="float-lg-right m-1">
-                                            <form class="navbar-form navbar-left" role="search"
-                                                action="<?php echo site_url('admin/diagnosa/laporan_pdf1');?>"
-                                                method="post">
-                                                <div class="form-group">
-                                                    <label for="tahun">Tanggal</label>
-                                                    <input
-                                                        class="form-control form-control-sm <?php echo form_error('tahun') ? 'is-invalid':'' ?>"
-                                                        type="date" name="tanggal" placeholder="tanggal" required />
-                                                </div>
-                                                <button type="submit" class="btn btn-primary btn-sm">
-                                                    Cetak Data Pertanggal</button>
-                                            </form>
-                                        </div>
-                                        <div class="float-lg-right m-1">
+
+                                        <div class="float-lg-lift m-1">
                                             <form class="navbar-form navbar-left" role="search"
                                                 action="<?php echo site_url('admin/diagnosa/laporan_pdf2');?>"
                                                 method="post">
                                                 <div class="form-group">
-                                                    <label for="tahun">Tahun</label>
+												<label for="tahun">Tahun</label>
                                                     <input
                                                         class="form-control form-control-sm <?php echo form_error('tahun') ? 'is-invalid':'' ?>"
                                                         type="text" name="tahun" placeholder="tahun" maxlength="4"
@@ -82,6 +79,9 @@
 
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
+                                        <a class="btn btn-primary btn-sm m-1"
+                                            href="<?php echo site_url('admin/diagnosa/laporan_pdfAll') ?>">Cetak Semua
+                                            Data</a>
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Close</button>
                                     </div>
