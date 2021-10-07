@@ -4,7 +4,7 @@ class User_model extends CI_Model
 	private $_table = "users";
 	
 	public $user_id;
-	public $username;
+	public $username; 
 	public $password;
 	public $nama_user;
 	public $email;
